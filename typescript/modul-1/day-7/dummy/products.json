@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "id": "P-001",
+            "name" : "Indomie Kuah",
+            "stock": 5
+        },
+          {
+            "id": "P-002",
+            "name" : "Indomie Goreng",
+            "stock": 10
+        },
+          {
+            "id": "P-003",
+            "name" : "Sunlight",
+            "stock": 7
+        }
+    ]
+}
