@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>User Profile Card</title>
+
+  <!-- 1. EXTERNAL STYLE: Menghubungkan file style.css terpisah di atas -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 2. INTERNAL STYLE: Menulis aturan CSS langsung di dalam tag <style> di <head> -->
+  <style>
+    /* Mengatur gaya nama pengguna */
+    .user-name {
+      color: #2c3e50;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    /* Mengatur gaya profesi */
+    .user-job {
+      color: #7f8c8d;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menggunakan class dari External Style (profile-card) -->
+  <div class="profile-card">
+    
+    <!-- Menggunakan class dari Internal Style (user-name & user-job) -->
+    <h2 class="user-name">Alex Johnson</h2>
+    <p class="user-job">Web Developer</p>
+
+    <!-- 3. INLINE STYLE: Menulis gaya langsung di dalam atribut style tag HTML -->
+    <button style="background-color: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px;">
+      Follow Profile
+    </button>
+
+  </div>
+
+</body>
+</html>
