@@ -9,5 +9,157 @@
   <!-- Isi utama website yang dilihat oleh pengunjung -->
   <h1>Easy Homemade Fried Rice</h1>
   <p>A quick and delicious dish for a weeknight dinner.</p>
+
+  <!-- h2: sub-bab / bagian utama resep -->
+  <h2>Ingredients</h2>
+  <p>2 cups of cold cooked rice, 2 cloves of garlic, and 1 tablespoon of soy sauce.</p>
+
+  <h2>Cooking Steps</h2>
+
+  <!-- h3: langkah spesifik di bawah bab Cooking Steps-->
+  <h3>Step 1: Preparation</h3>
+  <p>Chop the garlic finely and heat the oil in a pan.</p>
+
+  <h3>Step 2: Cooking</h3>
+
+  <!-- h4: detail pendukung di dalam langkah 2 -->
+  <h4>Safety Tip</h4>
+  <p>Be careful when adding rice to hot oil to avoid splashing.</p>
+
+  <!-- h5: catatan teknis/ informasi tambahan -->
+   <h5>Chef's Secret Note</h5>
+   <p>Using day-old rice prevents it from getting mushy.</p>
+
+   <!-- h6: teks pendukung (sumber)-->
+  <h6>Source: Grandma's Cookbook</h6>
+
+  <!-- br: untuk memberikan enter antar paragraph -->
+  <h2>Restaurant Location and Contact</h2>
+  <p>
+    Grandma's Kitchen Street No.12<br>
+    Downtown District, Cityville<br>
+    Phone: (021) 555-019
+  </p>
+
+  <!-- strong, em, mark, u -->
+  <h2>Customer Reviews</h2>
+  <p>
+    <strong>Warning:</strong> This dish contains peanuts. Please check for allergies before serving!
+  </p>
+  <p>
+    This recipe is <em>really</em> easy to follow, even for complete beginners.
+  </p>
+  <p>
+    Special Offer: Get a <mark>50% discount</mark> on cooking classes this weekend!
+  </p>
+  <p>
+    Please double-check your ordering <u>address</u> before completing the payment.
+  </p>
+
+  <!-- unordered & ordered list -->
+   <h2>Ingredients Checklist</h2>
+   <ul>
+    <li>2 cups cooked rice</li>
+    <li>2 cloves garlic</li>
+    <li>1 tablespoon soy sauce</li>
+   </ul>
+
+   <!-- ul type=circle : bulatan kosong tengahnya -->
+    <ul type="circle">
+      <li>Optional: Chopped chilli </li>
+      <li>Optional: Green onion </li>
+    </ul>
+
+    <!-- ul type=square : kotak hitam -->
+     <ul type="square">
+      <li>Alternative: Olive oil instead of vegetable oil</li>
+     </ul>
+
+     <h2 id="instruction-section">Step-by-step Instructions</h2>
+     <ol>
+      <li>Prepare serving plate.</li>
+      <li>Garnish with cucumber slices.</li>
+     </ol>
+
+     <ol type="a">
+      <li>Serve while hot.</li>
+      <li>Enjoy your meal!</li>
+     </ol>
+
+     <!-- HTML table -->
+      <h2>Nutritional Information</h2>
+
+      <table border="1">
+        <tr>
+          <th>Category</th>
+          <th>Nutrient</th>
+          <th>Amount</th>
+        </tr>
+        <tr>
+          <!-- rowspan="2" : Sel ini menggabungkan 2 baris ke bawah -->
+          <td rowspan="2">Macronutrients</td>
+          <td>Carbohydrates</td>
+          <td>45g</td>
+        </tr>
+        <tr>
+          <td>Protein</td>
+          <td>9g</td>
+        </tr>
+        <tr>
+          <td>Micronutrients</td>
+          <td>Sodium</td>
+          <td>520mg</td>
+        </tr>
+        <tr>
+          <!-- colspan="3" : Sel ini menggabungkan 3 kolom ke samping -->
+          <td colspan="3">Note: values are calculated per serving size (200g)</td>
+        </tr>
+      </table>
+
+      <!-- anchor tag, figcaption, image -->
+      <h2>Recipe Preview and Resources</h2>
+
+      <!-- figure: pembungkus konteen media (seperti gambar dan keterangannya)-->
+      <figure>
+        <!-- img: menampilkan gambar dengan atribut src (sumber) dan alt (deskripsi alternatif)-->
+        <img src="https://i.pinimg.com/736x/75/b3/42/75b342c9b3d9b3be0e287f6f1e046318.jpg" alt="Delicious homemade fried rice plated with cucumbers" width="400">
+        
+        <!-- figcaption: teks keterangan/caption resmi untuk gambar di dalam figure -->
+        <figcaption>Figure 1 : Serving suggestion for homemade fried rice with fresh garnish</figcaption>
+      </figure>
+
+      <p>Want to explore more cooking ideas? Check our 
+        <a href="https://cookpad.com/id" target="_blank">Full Recipe Catalog</a>
+      </p>
+
+      <p>
+        Have question about this instruction?
+        <a href="#instruction-section">Jump to Instruction</a>
+      </p>
+
+      <!-- HTML Form -->
+      <h2>Leave a Review (for HTML form testing)</h2>
+
+      <form action="">
+
+        <!-- Input Teks Biasa -->
+        <p>
+          <label for="reviewer-name">Your Name:</label>
+          <input type="text" id="reviewer-name" name="name" placeholder="John Doe" required>
+        </p>
+
+        <!-- Input Teks Email -->
+          <p>
+          <label for="reviewer-email">Your Email:</label>
+          <input type="email" id="reviewer-email" name="email" placeholder="john@example.com" required>
+        </p>
+
+         <!-- Input Password -->
+          <p>
+          <label for="reviewer-password">Your Password:</label>
+          <input type="password" id="reviewer-password" name="password" placeholder="admin123" required>
+        </p>
+      </form>
 </body>
 </html>
+
