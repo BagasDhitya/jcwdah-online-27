@@ -1,43 +1,21 @@
-// import ReusableText from "./components/ReusableText";
-import ExperienceCard from "./components/ExperienceCard";
-import HeaderProfile from "./components/HeaderProfile";
-import SkillBadge from "./components/SkillBadge";
+import "./App.css";
+import { Link, Outlet } from "react-router-dom";
 
 export default function App() {
-  const skills: string[] = ["React", "Typescript", "PostgreSQL"];
-
   return (
     <div className="cv-container">
-      {/* <div>
-        <ReusableText name="Budi" age={25} />
-        <ReusableText name="Siti" age={22} />
-      </div> */}
+      <nav className="nav-bar">
+        <Link to={"/home"}>Home</Link>
+        <Link to={"/projects"}>Projects</Link>
+        <Link to={"/contacts"}>Contact</Link>
+      </nav>
 
-      <HeaderProfile name="John Doe" role="Fullstack Web Developer" />
+      <hr style={{ borderColor: "var(--border-color", margin: "20px 0" }} />
 
-      <h3>Skills</h3>
-      <div className="skill-container">
-        {skills.map((skill, index) => {
-          const isLast = index === skills.length - 1;
-          const label = isLast ? skill : `${skill}, `;
-
-          return <SkillBadge key={index} skillName={label} />;
-        })}
-      </div>
-
-      <h3>Work Experience</h3>
-      <ExperienceCard
-        role="Frontend Engineer"
-        company="Tech Innovators Inc."
-        period="2024 - Present"
-        description="Built scalable dashboard components using React & Typescript for enterprise clients"
-      />
-      <ExperienceCard
-        role="Junior Developer"
-        company="Digital Studio"
-        period="2023 - 2024"
-        description="Maintain client websites, optimized web performance, and fixed bugs"
-      />
+      {/* dynamic content based on current route */}
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }

@@ -80,3 +80,20 @@ body {
   font-size: 14px;
   line-height: 1.5;
 }
+
+.nav-bar {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.nav-bar a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.nav-bar a:hover {
+  color: var(--primary-color);
+}
