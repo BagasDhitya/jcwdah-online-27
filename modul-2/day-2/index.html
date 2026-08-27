@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Advanced CSS</title>
+  </head>
+  <body>
+    <div class="box static">Static</div>
+
+    <div class="parent">
+      <div class="box relative">Relative</div>
+      <div class="box absolute">Absolute</div>
+    </div>
+
+    <div class="box sticky">Sticky</div>
+    <div class="box fixed">Fixed</div>
+
+    <!-- Media Query Demo Container -->
+    <section class="mq-container">
+      <h2>Media Query Demo</h2>
+
+      <!-- 1. Layout & Font Size Demo -->
+      <div class="mq-card">Card 1</div>
+      <div class="mq-card">Card 2</div>
+
+      <!-- 2. Responsive Image Source -->
+      <picture>
+        <source
+          media="(min-width: 768px)"
+          srcset="
+            https://media.istockphoto.com/id/1980276924/vector/no-photo-thumbnail-graphic-element-no-found-or-available-image-in-the-gallery-or-album-flat.jpg?s=612x612&w=0&k=20&c=ZBE3NqfzIeHGDPkyvulUw14SaWfDj2rZtyiKv3toItk=
+          "
+        />
+        <img
+          src="https://img.magnific.com/free-vector/illustration-gallery-icon_53876-27002.jpg?semt=ais_hybrid&w=740&q=80"
+          alt="Responsive Banner"
+          class="responsive-img"
+        />
+      </picture>
+    </section>
+
+    <!-- CSS Grid Demo Container -->
+    <section class="grid-container">
+      <h2>CSS Grid Demo</h2>
+
+      <!-- Demo Manual (Row & Column)-->
+      <div class="manual-grid">
+        <div class="grid-box box-main">Main Content (Column 1-3, Row 1)</div>
+        <div class="grid-box box-side">Sidebar (Column 3, Row 1-3)</div>
+        <div class="grid-box">Box A</div>
+        <div class="grid-box">Box B</div>
+      </div>
+    </section>
+
+    <!-- CSS Flex Demo Container -->
+    <section class="flex-container-demo">
+      <h2>Flexbox Core Properties Demo</h2>
+
+      <!-- Flex Direction -->
+      <h3>Flex Direction (Column) & Gap</h3>
+      <div class="flex-dir-demo">
+        <div class="flex-item">Item 1 (Row/Column Direction)</div>
+        <div class="flex-item">Item 2</div>
+        <div class="flex-item">Item 3</div>
+        <div class="flex-item">Item 4</div>
+      </div>
+
+      <!-- Flex Wrap -->
+      <h3>Flex Wrap</h3>
+      <div class="flex-wrap-demo">
+        <div class="flex-item wrap-item">Wrap Item 1</div>
+        <div class="flex-item wrap-item">Wrap Item 2</div>
+        <div class="flex-item wrap-item">Wrap Item 3</div>
+        <div class="flex-item wrap-item">Wrap Item 4</div>
+        <div class="flex-item wrap-item">Wrap Item 5</div>
+        <div class="flex-item wrap-item">Wrap Item 6</div>
+        <div class="flex-item wrap-item">Wrap Item 7</div>
+        <div class="flex-item wrap-item">Wrap Item 8</div>
+      </div>
+
+      <!-- Flex Shrink -->
+      <h3>Flex Shrink</h3>
+      <div class="flex-shrink-demo">
+        <div class="flex-item no-shrink">Shrink 0 (Tetap Utuh)</div>
+        <div class="flex-item do-shrink">Shrink 1 (Menyusut)</div>
+      </div>
+    </section>
+
+    <!-- 2D Transform Demo -->
+    <section class="transform-container-demo">
+      <h2>2D Transform Demo</h2>
+
+      <!-- Translate Demo -->
+      <h3>Transform Translate</h3>
+      <div class="transform-box translate-demo">Hover me (Translate X & Y)</div>
+
+      <!-- Rotate Demo -->
+      <h3>Transform Rotate</h3>
+      <div class="transform-box rotate-demo">Hover me (Rotate 45deg)</div>
+    </section>
+  </body>
+</html>

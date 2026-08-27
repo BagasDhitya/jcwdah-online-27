@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Snake 3D</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #1a1a1a;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      #ui-container {
+        position: absolute;
+        top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 16px 28px;
+        border-radius: 12px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      }
+
+      .score-board {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        transition:
+          background-color 0.2s,
+          transform 0.1s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      button:active {
+        transform: scale(0.96);
+      }
+
+      button#stop-btn {
+        background-color: #f44336;
+      }
+
+      button#stop-btn:hover {
+        background-color: #da190b;
+      }
+
+      #game-container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+    <!-- Three.js untuk grafis 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  </head>
+  <body>
+    <div id="ui-container">
+      <div class="score-board">Score: <span id="score">0</span></div>
+      <div class="controls">
+        <button id="start-btn" onclick="startGame()">Play</button>
+        <button id="stop-btn" onclick="stopGame()">Stop</button>
+      </div>
+    </div>
+
+    <div id="game-container"></div>
+    <script>
+      // Konfigurasi Area Game
+      const BOARD_SIZE = 20;
+      const SPEED = 150; // milidetik per langkah
+
+      // Variabel Global Game
+      let scene, camera, renderer;
+      let snake = [];
+      let snakeDirection = { x: 1, y: 0 };
+      let nextDirection = { x: 1, y: 0 };
+      let foodMesh;
+      let foodPosition = { x: 0, y: 0 };
+      let score = 0;
+      let gameInterval = null;
+      let isPlaying = false;
+
+      // Material 3D
+      const snakeHeadMaterial = new THREE.MeshPhongMaterial({
+        color: 0x2e7d32,
+        shininess: 80,
+      });
+      const snakeBodyMaterial = new THREE.MeshPhongMaterial({
+        color: 0x4caf50,
+        shininess: 40,
+      });
+      const foodMaterial = new THREE.MeshPhongMaterial({
+        color: 0xe53935,
+        shininess: 100,
+      });
+      const boxGeometry = new THREE.BoxGeometry(0.9, 0.9, 0.9);
+
+      // Initializer Utama
+      function init() {
+        const container = document.getElementById("game-container");
+
+        // 1. Setup Scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x121212);
+
+        // 2. Setup Camera
+        camera = new THREE.PerspectiveCamera(
+          45,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000,
+        );
+        camera.position.set(
+          BOARD_SIZE / 2,
+          -BOARD_SIZE * 0.9,
+          BOARD_SIZE * 1.1,
+        );
+        camera.lookAt(BOARD_SIZE / 2, BOARD_SIZE / 2, 0);
+
+        // 3. Setup Renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        container.appendChild(renderer.domElement);
+
+        // 4. Pencahayaan (Lighting)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(BOARD_SIZE / 2, -10, 20);
+        dirLight.castShadow = true;
+        scene.add(dirLight);
+
+        // 5. Papan Permainan (Floor Grid)
+        createBoard();
+
+        // Event Listeners
+        window.addEventListener("keydown", handleKeyPress);
+        window.addEventListener("resize", onWindowResize);
+
+        // Render pertama kali
+        renderer.render(scene, camera);
+      }
+
+      // Membuat papan arena 3D
+      function createBoard() {
+        const boardGeo = new THREE.PlaneGeometry(BOARD_SIZE, BOARD_SIZE);
+        const boardMat = new THREE.MeshPhongMaterial({
+          color: 0x263238,
+          side: THREE.DoubleSide,
+        });
+        const boardMesh = new THREE.Mesh(boardGeo, boardMat);
+        boardMesh.position.set(
+          BOARD_SIZE / 2 - 0.5,
+          BOARD_SIZE / 2 - 0.5,
+          -0.5,
+        );
+        scene.add(boardMesh);
+
+        // Grid helper di atas papan
+        const grid = new THREE.GridHelper(
+          BOARD_SIZE,
+          BOARD_SIZE,
+          0x00e676,
+          0x37474f,
+        );
+        grid.position.set(BOARD_SIZE / 2 - 0.5, BOARD_SIZE / 2 - 0.5, -0.49);
+        grid.rotation.x = Math.PI / 2;
+        scene.add(grid);
+      }
+
+      // Memulai Permainan
+      function startGame() {
+        if (isPlaying) return;
+
+        resetGame();
+        isPlaying = true;
+        gameInterval = setInterval(gameLoop, SPEED);
+      }
+
+      // Menghentikan / Pause Permainan
+      function stopGame() {
+        if (!isPlaying) return;
+
+        clearInterval(gameInterval);
+        gameInterval = null;
+        isPlaying = false;
+      }
+
+      // Reset Kondisi Game
+      function resetGame() {
+        stopGame();
+
+        // Hapus mesh ular yang lama
+        snake.forEach((segment) => scene.remove(segment.mesh));
+        snake = [];
+
+        // Hapus makanan lama jika ada
+        if (foodMesh) scene.remove(foodMesh);
+
+        // Inisialisasi Ular (Urutan: [Kepala, Badan, Ekor])
+        const startX = Math.floor(BOARD_SIZE / 4);
+        const startY = Math.floor(BOARD_SIZE / 2);
+        snakeDirection = { x: 1, y: 0 };
+        nextDirection = { x: 1, y: 0 };
+
+        for (let i = 0; i < 3; i++) {
+          const isHead = i === 0;
+          const mesh = new THREE.Mesh(
+            boxGeometry,
+            isHead ? snakeHeadMaterial : snakeBodyMaterial,
+          );
+          const pos = { x: startX - i, y: startY };
+          mesh.position.set(pos.x, pos.y, 0);
+          scene.add(mesh);
+          snake.push({ pos, mesh });
+        }
+
+        // Reset Score
+        score = 0;
+        document.getElementById("score").innerText = score;
+
+        // Spawn Makanan
+        spawnFood();
+      }
+
+      // Mengontrol Arah dengan Arrow Keys
+      function handleKeyPress(e) {
+        if (!isPlaying) return;
+
+        switch (e.key) {
+          case "ArrowUp":
+            if (snakeDirection.y === 0) nextDirection = { x: 0, y: 1 };
+            break;
+          case "ArrowDown":
+            if (snakeDirection.y === 0) nextDirection = { x: 0, y: -1 };
+            break;
+          case "ArrowLeft":
+            if (snakeDirection.x === 0) nextDirection = { x: -1, y: 0 };
+            break;
+          case "ArrowRight":
+            if (snakeDirection.x === 0) nextDirection = { x: 1, y: 0 };
+            break;
+        }
+      }
+
+      // Menelurkan Makanan secara Acak
+      function spawnFood() {
+        if (foodMesh) scene.remove(foodMesh);
+
+        let validPos = false;
+        while (!validPos) {
+          foodPosition = {
+            x: Math.floor(Math.random() * BOARD_SIZE),
+            y: Math.floor(Math.random() * BOARD_SIZE),
+          };
+          validPos = !snake.some(
+            (segment) =>
+              segment.pos.x === foodPosition.x &&
+              segment.pos.y === foodPosition.y,
+          );
+        }
+
+        // Makanan berupa Bola 3D (Sphere)
+        const foodGeo = new THREE.SphereGeometry(0.4, 16, 16);
+        foodMesh = new THREE.Mesh(foodGeo, foodMaterial);
+        foodMesh.position.set(foodPosition.x, foodPosition.y, 0);
+        scene.add(foodMesh);
+      }
+
+      // Logika Utama Loop Game
+      // Logika Utama Loop Game
+      function gameLoop() {
+        snakeDirection = { ...nextDirection };
+        const headPos = snake[0].pos;
+
+        // Posisi Kepala Baru
+        let newHeadPos = {
+          x: headPos.x + snakeDirection.x,
+          y: headPos.y + snakeDirection.y,
+        };
+
+        // Fitur Loop Dinding (Teleport ke Sisi Seberang)
+        if (newHeadPos.x < 0) {
+          newHeadPos.x = BOARD_SIZE - 1;
+        } else if (newHeadPos.x >= BOARD_SIZE) {
+          newHeadPos.x = 0;
+        }
+
+        if (newHeadPos.y < 0) {
+          newHeadPos.y = BOARD_SIZE - 1;
+        } else if (newHeadPos.y >= BOARD_SIZE) {
+          newHeadPos.y = 0;
+        }
+
+        // Cek apakah langkah ini akan memakan makanan
+        const willEat =
+          newHeadPos.x === foodPosition.x && newHeadPos.y === foodPosition.y;
+
+        // Rule Mati: HANYA Menabrak Badan/Ekor Sendiri
+        // Jika tidak makan, ekor paling belakang akan berpindah, jadi tidak dihitung tabrakan
+        const bodyToCheck = willEat ? snake : snake.slice(0, -1);
+        const hitSelf = bodyToCheck.some(
+          (segment) =>
+            segment.pos.x === newHeadPos.x && segment.pos.y === newHeadPos.y,
+        );
+
+        if (hitSelf) {
+          return gameOver("Menabrak Badan/Ekor Sendiri!");
+        }
+
+        // Buat Mesh Kepala Baru
+        const newHeadMesh = new THREE.Mesh(boxGeometry, snakeHeadMaterial);
+        newHeadMesh.position.set(newHeadPos.x, newHeadPos.y, 0);
+        scene.add(newHeadMesh);
+
+        // Ubah warna kepala lama menjadi warna badan
+        snake[0].mesh.material = snakeBodyMaterial;
+
+        // Tambahkan Kepala Baru ke Urutan Pertama Array Ular
+        snake.unshift({ pos: newHeadPos, mesh: newHeadMesh });
+
+        // Makan Makanan (Update Score & Panjang Ular)
+        if (willEat) {
+          score += 10;
+          document.getElementById("score").innerText = score;
+          spawnFood();
+        } else {
+          // Hapus ekor paling belakang jika tidak makan
+          const tail = snake.pop();
+          scene.remove(tail.mesh);
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      // Penanganan Game Over
+      function gameOver(reason) {
+        stopGame();
+        alert(`Game Over! (${reason})\nScore Akhir: ${score}`);
+      }
+
+      // Penanganan Ukuran Layar Berubah
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.render(scene, camera);
+      }
+
+      // Jalankan inisialisasi awal saat halaman dimuat
+      window.onload = init;
+    </script>
+  </body>
+</html>

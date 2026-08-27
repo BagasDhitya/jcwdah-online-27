@@ -1,0 +1,261 @@
+/* mendefinisikan warna lewat :root */
+
+:root {
+  --bg-color: #f0f2f5;
+  --box-bg: #3b82f6;
+  --text-color: #ffffff;
+  --accent-color: #ef4444;
+
+  --card-bg: #ffffff;
+  --card-text: #1e293b;
+
+  --dashboard-color: rgba(61, 129, 104, 1);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  padding: 20px;
+  height: 200vh; /* memberi space scroll untuk contoh sticky & fixed */
+}
+
+.box {
+  background-color: var(--box-bg);
+  color: var(--text-color);
+  padding: 10px;
+  margin: 10px 0;
+  width: 100px;
+  text-align: center;
+}
+
+.static {
+  position: static;
+}
+
+.relative {
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+
+.parent {
+  position: relative;
+  background-color: #cbd5e1;
+  height: 80px;
+}
+
+.absolute {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--accent-color);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  background-color: #10b981;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: #8b5cf6;
+}
+
+/* Base Style Demo Section */
+.mq-container {
+  margin-top: 40px;
+  padding: 15px;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+}
+
+.mq-card {
+  background-color: var(--box-bg);
+  color: var(--text-color);
+  padding: 15px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+/* Use Case Media Query */
+
+/* Case 1 : Mengubah Ukuran Font berdasarkan Lebar Layar */
+@media (min-width: 600px) {
+  .mq-card {
+    font-size: 20px;
+    background-color: var(--dashboard-color);
+  }
+}
+
+/* Case 2 : Mengubah layout dari Menumpuk (Mobile) jadi Desktop */
+@media (min-width: 768px) {
+  .mq-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  .mq-card {
+    flex: 1;
+    margin-bottom: 0;
+  }
+}
+
+/* Case 3 : Mengubah Tema Warna Otomatis (Preferensi Perangkat) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --card-text: #f8fafc;
+  }
+}
+
+/* Case 4 : Mengubah Tampilan Berdasarkan Orientasi HP */
+@media (orientation: landscape) and (max-width: 768px) {
+  .mq-card {
+    background-color: #10b981;
+  }
+}
+
+/* CSS GRID DEMO */
+.grid-container {
+  margin-top: 40px;
+  padding: 15px;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+}
+
+.grid-box {
+  background-color: var(--box-bg);
+  color: var(--text-color);
+  padding: 15px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.manual-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /*  membuat 3 kolom berukuran sama (1 fraction) */
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+/* GRID COLUMN: Elemen ini membentang dari Garis Kolom 1 sampai 3 */
+.box-main {
+  grid-column: 1/3;
+  background-color: var(--accent-color);
+}
+
+/* GRID ROW: Elemen ini membentang dari Garis Baris 1 sampai 3 */
+.box-side {
+  grid-column: 3;
+  grid-row: 1/3;
+  background-color: #8b5cf6;
+}
+
+@media (min-width: 768px) {
+  .manual-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Flexbox Core Demo */
+
+.flex-container-demo {
+  margin-top: 40px;
+  padding: 15px;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+}
+
+.flex-item {
+  background-color: var(--box-bg);
+  color: var(--text-color);
+  padding: 12px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* flex direction & gap */
+.flex-dir-demo {
+  display: flex;
+  flex-direction: column; /* column -> vertikal, row -> horizontal */
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+/* flex wrap */
+.flex-wrap-demo {
+  background-color: var(--bg-color);
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.wrap-item {
+  flex-basis: 180px;
+}
+
+/* flex shrink */
+.flex-shrink-demo {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.no-shrink {
+  width: 250px;
+  flex-shrink: 0; /* DILARANG menyusut, ukuran terkunci di 250px */
+}
+
+.do-shrink {
+  width: 250px;
+  flex-shrink: 1; /* Boleh menyusut jika layar menyempit demi menampung elemen lain */
+}
+
+/* 2D Transform Demo */
+.transform-container-demo {
+  margin-top: 40px;
+  padding: 15px;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+}
+
+.transform-box {
+  background-color: var(--box-bg);
+  color: var(--text-color);
+  padding: 20px;
+  width: 150px;
+  text-align: center;
+  border-radius: 4px;
+  margin-bottom: 25px;
+
+  transition: transform 0.1s ease;
+}
+
+/* Menggeser elemen: 20px ke kanan (X). -10px ke atas (Y) saat kursor diarahkan */
+.translate-demo:hover {
+  transform: translate(20px, -10px);
+  background-color: var(--accent-color);
+}
+
+/* Memutar elemen 45 derajat */
+.rotate-demo:hover {
+  transform: rotate(45deg);
+  background-color: #10b981;
+}

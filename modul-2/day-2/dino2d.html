@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dino Runner Game</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #222;
+        color: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      #game-container {
+        position: relative;
+        width: 800px;
+        height: 300px;
+        background: linear-gradient(
+          to bottom,
+          #87ceeb 70%,
+          #e0cda9 70%,
+          #8b4513 75%
+        );
+        border: 4px solid #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      /* UI Header */
+      #ui {
+        position: absolute;
+        top: 12px;
+        left: 16px;
+        right: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .score-board {
+        font-size: 20px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px #000;
+      }
+
+      .btn {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn:hover {
+        background-color: #45a049;
+      }
+      .btn#pause-btn {
+        background-color: #ff9800;
+      }
+
+      /* Controls Guide */
+      #controls-guide {
+        position: absolute;
+        bottom: 8px;
+        right: 16px;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+
+      /* Ground Animation */
+      #ground {
+        position: absolute;
+        bottom: 0;
+        width: 200%;
+        height: 90px;
+        background: repeating-linear-gradient(
+          90deg,
+          #8b4513,
+          #8b4513 40px,
+          #a0522d 40px,
+          #a0522d 80px
+        );
+      }
+
+      .running #ground {
+        animation: moveGround 1s linear infinite;
+      }
+
+      @keyframes moveGround {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-80px);
+        }
+      }
+
+      /* Dinosaurus */
+      #dino {
+        position: absolute;
+        bottom: 90px;
+        left: 50px;
+        width: 44px;
+        height: 52px;
+        background-color: #2e7d32;
+        border-radius: 6px;
+        transition:
+          height 0.1s,
+          width 0.1s;
+      }
+
+      /* Dino Detail Shapes */
+      #dino::before {
+        /* Mata */
+        content: "";
+        position: absolute;
+        top: 6px;
+        right: 8px;
+        width: 6px;
+        height: 6px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+
+      #dino::after {
+        /* Mulut / Rahang */
+        content: "";
+        position: absolute;
+        top: 18px;
+        right: -6px;
+        width: 14px;
+        height: 8px;
+        background-color: #2e7d32;
+        border-radius: 2px;
+      }
+
+      /* State Dino: Sleding */
+      #dino.sliding {
+        height: 26px;
+        width: 58px;
+        bottom: 90px;
+      }
+
+      #dino.sliding::after {
+        top: 6px;
+        right: -8px;
+      }
+
+      /* State Dino: Menggigit */
+      #dino.biting::after {
+        background-color: #d32f2f; /* Mulut merah saat menggigit */
+        width: 22px;
+        height: 14px;
+        top: 14px;
+        right: -12px;
+      }
+
+      /* Halangan (Obstacles) */
+      .obstacle {
+        position: absolute;
+        bottom: 90px;
+      }
+
+      .obstacle.batu {
+        width: 30px;
+        height: 30px;
+        background-color: #757575;
+        border-radius: 4px;
+      }
+
+      .obstacle.kayu {
+        width: 20px;
+        height: 55px;
+        background-color: #5d4037;
+        border-radius: 2px;
+      }
+
+      .obstacle.dino-musuh {
+        width: 40px;
+        height: 35px;
+        background-color: #c62828;
+        border-radius: 4px;
+        bottom: 120px; /* Terbang melayang (harus disleding/digigit) */
+      }
+
+      /* Overlay Message */
+      #message-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 20;
+      }
+
+      #message-overlay h1 {
+        font-size: 36px;
+        margin-bottom: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="ui">
+        <div class="score-board">Score: <span id="score">0</span></div>
+        <div>
+          <button id="start-btn" class="btn" onclick="togglePlayPause()">
+            Play
+          </button>
+        </div>
+      </div>
+
+      <div id="controls-guide">
+        [Arrow Up / Space] Lompat | [Arrow Down] Sleding | [A] Gigit
+      </div>
+
+      <div id="ground"></div>
+      <div id="dino"></div>
+
+      <div id="message-overlay">
+        <h1 id="overlay-title">Dino Runner</h1>
+        <button class="btn" onclick="startGame()">Mulai Game</button>
+      </div>
+    </div>
+
+    <script>
+      const dino = document.getElementById("dino");
+      const container = document.getElementById("game-container");
+      const scoreElement = document.getElementById("score");
+      const startBtn = document.getElementById("start-btn");
+      const overlay = document.getElementById("message-overlay");
+      const overlayTitle = document.getElementById("overlay-title");
+
+      // State Game
+      let isPlaying = false;
+      let isGameOver = false;
+      let score = 0;
+      let scoreInterval = null;
+      let obstacleTimeout = null;
+      let gameLoopId = null;
+
+      // State Dino
+      let isJumping = false;
+      let isSliding = false;
+      let isBiting = false;
+      let dinoY = 0; // Posisi tambahan saat melompat
+      let jumpVelocity = 0;
+      const gravity = 0.9;
+
+      // Array menampung halangan yang aktif
+      let obstacles = [];
+
+      // Keyboard Controller
+      window.addEventListener("keydown", (e) => {
+        if (!isPlaying || isGameOver) return;
+
+        if (
+          (e.key === "ArrowUp" || e.key === " ") &&
+          !isJumping &&
+          !isSliding
+        ) {
+          // LOMPAT
+          isJumping = true;
+          jumpVelocity = 14;
+        } else if (e.key === "ArrowDown" && !isJumping && !isSliding) {
+          // SLEDING
+          isSliding = true;
+          dino.classList.add("sliding");
+        } else if ((e.key === "a" || e.key === "A") && !isBiting) {
+          // GIGIT
+          isBiting = true;
+          dino.classList.add("biting");
+          setTimeout(() => {
+            isBiting = false;
+            dino.classList.remove("biting");
+          }, 300); // Durasi menggigit 300ms
+        }
+      });
+
+      window.addEventListener("keyup", (e) => {
+        if (e.key === "ArrowDown" && isSliding) {
+          isSliding = false;
+          dino.classList.remove("sliding");
+        }
+      });
+
+      // Play / Pause Toggle
+      function togglePlayPause() {
+        if (isGameOver) return;
+
+        if (isPlaying) {
+          pauseGame();
+        } else {
+          resumeGame();
+        }
+      }
+
+      function startGame() {
+        resetGame();
+        resumeGame();
+      }
+
+      function resumeGame() {
+        isPlaying = true;
+        startBtn.innerText = "Pause";
+        startBtn.id = "pause-btn";
+        overlay.style.display = "none";
+        container.classList.add("running");
+
+        // Start Loops
+        scoreInterval = setInterval(() => {
+          score++;
+          scoreElement.innerText = score;
+        }, 100);
+
+        spawnObstacle();
+        requestAnimationFrame(updateGame);
+      }
+
+      function pauseGame() {
+        isPlaying = false;
+        startBtn.innerText = "Play";
+        startBtn.id = "start-btn";
+        container.classList.remove("running");
+        overlayTitle.innerText = "Game Paused";
+        overlay.style.display = "flex";
+
+        clearInterval(scoreInterval);
+        clearTimeout(obstacleTimeout);
+        cancelAnimationFrame(gameLoopId);
+      }
+
+      function resetGame() {
+        pauseGame();
+        isGameOver = false;
+        score = 0;
+        scoreElement.innerText = score;
+
+        // Clear obstacles
+        obstacles.forEach((obs) => obs.element.remove());
+        obstacles = [];
+
+        // Reset Dino
+        isJumping = false;
+        isSliding = false;
+        isBiting = false;
+        dinoY = 0;
+        jumpVelocity = 0;
+        dino.style.bottom = "90px";
+        dino.className = "";
+      }
+
+      // Generator Halangan (Infinity Loop)
+      function spawnObstacle() {
+        if (!isPlaying) return;
+
+        const types = ["batu", "kayu", "dino-musuh"];
+        const randomType = types[Math.floor(Math.random() * types.length)];
+
+        const el = document.createElement("div");
+        el.className = `obstacle ${randomType}`;
+        el.style.left = "800px";
+        container.appendChild(el);
+
+        obstacles.push({
+          element: el,
+          type: randomType,
+          x: 800,
+        });
+
+        // Random waktu spawn berikutnya (1.2s - 2.8s)
+        const randomTime = Math.random() * 1600 + 1200;
+        obstacleTimeout = setTimeout(spawnObstacle, randomTime);
+      }
+
+      // Game Update Loop
+      function updateGame() {
+        if (!isPlaying) return;
+
+        // 1. Logika Fisika Melompat
+        if (isJumping) {
+          dinoY += jumpVelocity;
+          jumpVelocity -= gravity;
+
+          if (dinoY <= 0) {
+            dinoY = 0;
+            isJumping = false;
+          }
+          dino.style.bottom = 90 + dinoY + "px";
+        }
+
+        // Hitbox Dino
+        const dinoRect = dino.getBoundingClientRect();
+
+        // 2. Pergerakan & Deteksi Tabrakan Halangan
+        for (let i = obstacles.length - 1; i >= 0; i--) {
+          const obs = obstacles[i];
+          obs.x -= 6; // Kecepatan jalan halangan
+          obs.element.style.left = obs.x + "px";
+
+          const obsRect = obs.element.getBoundingClientRect();
+
+          // Cek jika Dino berhasil Menggigit Dino Musuh
+          if (obs.type === "dino-musuh" && isBiting) {
+            // Area gigit sedikit lebih depan dari dino
+            if (
+              dinoRect.right + 20 >= obsRect.left &&
+              dinoRect.left <= obsRect.right &&
+              dinoRect.bottom >= obsRect.top &&
+              dinoRect.top <= obsRect.bottom
+            ) {
+              // Musuh hancur saat digigit
+              obs.element.remove();
+              obstacles.splice(i, 1);
+              score += 20; // Bonus score gigit
+              continue;
+            }
+          }
+
+          // Cek Tabrakan Fisik (Collision Detection)
+          if (
+            dinoRect.right - 6 > obsRect.left &&
+            dinoRect.left + 6 < obsRect.right &&
+            dinoRect.bottom - 4 > obsRect.top &&
+            dinoRect.top + 4 < obsRect.bottom
+          ) {
+            gameOver();
+            return;
+          }
+
+          // Hapus halangan yang lewat dari layar
+          if (obs.x < -60) {
+            obs.element.remove();
+            obstacles.splice(i, 1);
+          }
+        }
+
+        gameLoopId = requestAnimationFrame(updateGame);
+      }
+
+      // Game Over
+      function gameOver() {
+        isGameOver = true;
+        pauseGame();
+        overlayTitle.innerText = `Game Over! Score: ${score}`;
+      }
+    </script>
+  </body>
+</html>
