@@ -1,0 +1,19 @@
+Contoh Kode TSX/JSX:
+
+<div className="cv-container">
+      <div className="app">App</div>
+ </div>
+
+------------------------------------------
+
+Tanpa TSX/JSX:
+
+React.createElement(
+    div,
+    {
+        className: 'cv-container'
+    },
+    div, {
+        className: 'app'
+    }
+)

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manual Example</title>
+  </head>
+
+  <body style="text-align: center; margin-top: 50px">
+    <!-- UI Structure -->
+    <h1 id="title" style="color: #333">Counter: 0</h1>
+    <button
+      id="btn-increment"
+      style="padding: 10 20px; font-size: 16px; cursor: pointer"
+    >
+      Tambah
+    </button>
+    <button
+      id="btn-decrement"
+      style="padding: 10 20px; font-size: 16px; cursor: pointer"
+    >
+      Kurang
+    </button>
+
+    <!-- Javascript DOM Manipulation -->
+    <script>
+      let count = 0;
+      const titleElement = document.getElementById("title");
+      const buttonIncrementElement = document.getElementById("btn-increment");
+      const buttonDecrementElement = document.getElementById("btn-decrement");
+
+      // manipulasi DOM secara langsung
+      buttonIncrementElement.addEventListener("click", () => {
+        count = count + 1;
+
+        // mengubah isi DOM secara langsung
+        titleElement.innerText = "Counter: " + count;
+        titleElement.style.color = count % 2 === 0 ? "blue" : "red";
+      });
+
+      buttonDecrementElement.addEventListener("click", () => {
+        if (count <= 0) {
+          alert("Number cannot be negative");
+        } else {
+          count = count - 1;
+
+          // mengubah isi DOM secara langsung
+          titleElement.innerText = "Counter: " + count;
+          titleElement.style.color = count % 2 === 0 ? "blue" : "red";
+        }
+      });
+    </script>
+  </body>
+</html>
