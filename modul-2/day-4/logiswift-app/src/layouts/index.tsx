@@ -2,7 +2,7 @@ import { Outlet, Link } from "react-router-dom";
 
 export default function RootLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
+    <div className="min-h-screen flex flex-col bg-very-light-gray text-gray-800">
       {/* Header / Navbar Seragam */}
       <header className="bg-blue-900 text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
