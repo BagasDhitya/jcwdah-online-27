@@ -1,6 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
 
+import UseRefDemo from "../pages/use-ref";
+import UseStateDemo from "../pages/use-state";
+import UseEffectDemo from "../pages/use-effect";
+import UseMemoDemoPage from "../pages/use-memo";
+import UseContextDemoPage from "../pages/use-context";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -8,23 +14,23 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "use-state",
-        element: <div>Contoh useState Page</div>,
+        element: <UseStateDemo />,
       },
       {
         path: "use-effect",
-        element: <div>Contoh useEffect Page</div>,
+        element: <UseEffectDemo />,
       },
       {
         path: "use-ref",
-        element: <div>Contoh useRef Page</div>,
+        element: <UseRefDemo />,
       },
       {
         path: "use-memo",
-        element: <div>Contoh useMemo Page</div>,
+        element: <UseMemoDemoPage />,
       },
       {
         path: "use-context",
-        element: <div>Contoh useContext Page</div>,
+        element: <UseContextDemoPage />,
       },
       {
         path: "custom-hook",
