@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 export default function DemoStorages() {
   // 1. LOCALSTORAGE
   // karakteristik: data tersimpan permanen meskipun tab/browser ditutup
@@ -25,8 +27,22 @@ export default function DemoStorages() {
     alert(`Langkah form saat ini: ${step ? step : "Belum ada data"}`);
   }
 
+  // 3. COOKIES
+  // karakteristik: data akan tetep ada selama belum lewat masa kadaluarsa
+
+  function adjustType() {
+    Cookies.set("user-type", "VIP", { expires: 1 });
+  }
+
+  function getInfoType() {
+    const type = Cookies.get("user-type");
+    alert("Your type is: " + type);
+  }
+
   function clearAllData() {
     localStorage.clear(); // clear() -> menghapus total semua local storage di satu web tersebut, kalo mau partial bisa pake removeItem()
+    sessionStorage.clear();
+    Cookies.remove("user-type");
   }
 
   return (
@@ -85,6 +101,32 @@ export default function DemoStorages() {
               className="bg-gray-500 text-white px-3 py-1 rounded mr-2"
             >
               Cek Step
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="border p-4 rounded bg-gray-50 ">
+        <h2 className="text-xl font-bold text-purple-600">3. Cookies</h2>
+        <p className="text-sm text-gray-600 mb-3">
+          Sifat: Data akan terus ada sampai masa kadaluarsa habis
+        </p>
+        <div className="space-y-2">
+          <div>
+            <span className="font-semibold block mb-1">
+              Contoh: Pemilihan paket Biasa/VIP pada aplikasi
+            </span>
+            <button
+              onClick={adjustType}
+              className="bg-blue-500 text-white px-3 py-1 rounded mr-2"
+            >
+              Setting sebagai VIP
+            </button>
+            <button
+              onClick={getInfoType}
+              className="bg-gray-500 text-white px-3 py-1 rounded mr-2"
+            >
+              Cek Info
             </button>
           </div>
         </div>
