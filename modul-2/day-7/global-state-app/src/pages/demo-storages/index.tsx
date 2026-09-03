@@ -1,5 +1,16 @@
 import Cookies from "js-cookie";
 
+// Batasan Browser Storage
+// - local storage cuma punya 5MB per domain
+// - session storage cuma punya 5MB per tab
+// - cookies cuma punya maksimal 4KB per cookie (dan dibatasi sekitar 20-50 cookie per domain)
+// - cuma bisa menyimpan TEKS string
+
+// Kapan harus menggunakan?
+// - gunakan localstorage jika ingin menyimpan data sederhana yang TIDAK SENSITIF dan TETAP ADA WALAU BROWSER DITUTUP
+// - gunakan sessionstorage jika ingin menyimpan data sementara, contoh: menyimpan step form
+// - gunakan cookies jika data tersebut butuh dibaca oleh server
+
 export default function DemoStorages() {
   // 1. LOCALSTORAGE
   // karakteristik: data tersimpan permanen meskipun tab/browser ditutup

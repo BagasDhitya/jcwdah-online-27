@@ -5,8 +5,12 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 
+import { LanguageProvider } from "./context/LanguageContext";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <LanguageProvider>
+      <RouterProvider router={router} />
+    </LanguageProvider>
   </StrictMode>,
 );
