@@ -1,6 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
 
+import DemoContext from "../pages/demo-context";
+import DemoStorages from "../pages/demo-storages";
+import DemoZustand from "../pages/demo-zustand";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -8,15 +12,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "storage",
-        element: <div>Storage Demo Page</div>,
+        element: <DemoStorages />,
       },
       {
         path: "context",
-        element: <div>useContext Demo Page</div>,
+        element: <DemoContext />,
       },
       {
         path: "zustand",
-        element: <div>Zustand Demo Page</div>,
+        element: <DemoZustand />,
       },
     ],
   },
