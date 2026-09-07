@@ -13,10 +13,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "auth",
+        path: "admin/dashboard",
         element: (
           <p className="text-slate-500 mt-2">
-            Halaman autentikasi akun pengguna.
+            Halaman dashboard admin Warmad Mart.
           </p>
         ),
       },
