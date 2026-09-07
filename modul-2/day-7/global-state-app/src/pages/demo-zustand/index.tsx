@@ -7,7 +7,7 @@ export default function DemoZustand() {
 
   const { email, isLoggedIn, login, logout } = useAuthStore();
 
-  function handleLoginSubmit(e: React.FormEvent) {
+  function handleLoginSubmit(e: React.ChangeEvent) {
     e.preventDefault();
 
     if (!inputEmail || !inputPassword) {
