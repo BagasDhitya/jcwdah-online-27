@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { BASE_URL } from "../config/api";
 import { type Product } from "../types/product";
 
@@ -10,7 +10,7 @@ export function useProducts() {
   const [error, setError] = useState<string | null>(null);
 
   // fitur 1 : mengambil semua product
-  const getProducts = useCallback(async () => {
+  async function getProducts() {
     setLoading(true);
     setError(null);
 
@@ -24,7 +24,11 @@ export function useProducts() {
     } finally {
       setLoading(false);
     }
+  }
+
+  useEffect(() => {
+    getProducts();
   }, []);
 
-  return { products, loading, error, getProducts };
+  return { products, loading, error };
 }
