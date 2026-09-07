@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
 
+import Home from "../pages/home";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -8,17 +10,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <p className="text-slate-500 mt-2">Selamat datang di Warmad Mart!</p>
-        ),
-      },
-      {
-        path: "admin/dashboard",
-        element: (
-          <p className="text-slate-500 mt-2">
-            Halaman dashboard admin Warmad Mart.
-          </p>
-        ),
+        element: <Home />,
       },
     ],
   },
