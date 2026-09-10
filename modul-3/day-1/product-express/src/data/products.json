@@ -2,17 +2,22 @@
   {
     "id": 1,
     "title": "Logitech MX Master 3S Wireless Mouse",
-    "description":
-      "Mouse nirkabel ergonomis tingkat lanjut dengan sensor Quiet Clicks 8K DPI dan scroll wheel MagSpeed.",
+    "description": "Mouse nirkabel ergonomis tingkat lanjut dengan sensor Quiet Clicks 8K DPI dan scroll wheel MagSpeed.",
     "stock": 25,
     "price": 1689000
   },
   {
     "id": 2,
     "title": "Keychron K2 V2 Mechanical Keyboard",
-    "description":
-      "Keyboard mekanikal nirkabel layout 75% dengan backlight RGB dan switch Gateron G Pro Brown.",
+    "description": "Keyboard mekanikal nirkabel layout 75% dengan backlight RGB dan switch Gateron G Pro Brown.",
     "stock": 12,
     "price": 1350000
+  },
+  {
+    "id": 3,
+    "title": "Indomie Kuah Rasa Kari Spesial",
+    "description": "lorem ipsum",
+    "stock": 10,
+    "price": 2500
   }
 ]
