@@ -1,0 +1,1983 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#b4c5ff",
+              "surface-container-low": "#eff4ff",
+              primary: "#004ac6",
+              "on-secondary-fixed": "#0d1c32",
+              "on-primary-fixed-variant": "#003ea8",
+              "primary-fixed": "#dbe1ff",
+              "inverse-on-surface": "#eaf1ff",
+              "surface-container-highest": "#d3e4fe",
+              "surface-bright": "#f8f9ff",
+              "on-surface-variant": "#434655",
+              "tertiary-fixed-dim": "#93ccff",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#d2e0fe",
+              "surface-container-high": "#dce9ff",
+              "on-tertiary-fixed-variant": "#004b73",
+              "tertiary-container": "#0073ae",
+              "on-tertiary-container": "#e7f2ff",
+              "on-background": "#0b1c30",
+              "surface-tint": "#0053db",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "on-primary-container": "#eeefff",
+              tertiary: "#005a89",
+              secondary: "#515f78",
+              outline: "#737686",
+              "primary-container": "#2563eb",
+              "surface-container": "#e5eeff",
+              "primary-fixed-dim": "#b4c5ff",
+              "on-surface": "#0b1c30",
+              "surface-variant": "#d3e4fe",
+              "surface-dim": "#cbdbf5",
+              "error-container": "#ffdad6",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed-dim": "#b9c7e4",
+              "tertiary-fixed": "#cce5ff",
+              error: "#ba1a1a",
+              background: "#f8f9ff",
+              "on-secondary-fixed-variant": "#39475f",
+              "inverse-surface": "#213145",
+              surface: "#f8f9ff",
+              "on-tertiary-fixed": "#001d31",
+              "outline-variant": "#c3c6d7",
+              "secondary-fixed": "#d6e3ff",
+              "on-secondary-container": "#55637d",
+              "on-error": "#ffffff",
+              "on-primary-fixed": "#00174b",
+              "on-primary": "#ffffff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "space-md": "1rem",
+              "margin-desktop": "3rem",
+              "margin-mobile": "1rem",
+              "space-sm": "0.75rem",
+              "space-2xl": "3rem",
+              "space-xs": "0.5rem",
+              "margin-tablet": "1.5rem",
+              gutter: "1.5rem",
+              "space-2xs": "0.25rem",
+              "space-xl": "2rem",
+              "space-lg": "1.5rem",
+              "space-3xl": "4rem",
+            },
+            fontFamily: {
+              "headline-lg": ["Plus Jakarta Sans"],
+              "headline-sm": ["Plus Jakarta Sans"],
+              "headline-lg-mobile": ["Plus Jakarta Sans"],
+              "label-code": ["JetBrains Mono"],
+              "display-lg-mobile": ["Plus Jakarta Sans"],
+              "label-md": ["Plus Jakarta Sans"],
+              "title-md": ["Plus Jakarta Sans"],
+              caption: ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "display-lg": ["Plus Jakarta Sans"],
+              "headline-md": ["Plus Jakarta Sans"],
+              "body-sm": ["Plus Jakarta Sans"],
+            },
+            fontSize: {
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-sm": [
+                "20px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg-mobile": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.015em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-code": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "title-md": [
+                "16px",
+                {
+                  lineHeight: "24px",
+                  letterSpacing: "-0.005em",
+                  fontWeight: "600",
+                },
+              ],
+              caption: [
+                "11px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "22px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.025em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.015em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-surface font-body-md text-body-md text-on-surface antialiased"
+  >
+    <header
+      class="sticky top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant"
+    >
+      <div
+        class="h-16 max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"
+      >
+        <div class="flex items-center gap-space-sm shrink-0">
+          <img
+            alt="LogiSwift Logo"
+            class="h-8 w-auto object-contain"
+            src="https://lh3.googleusercontent.com/aida/AEtjO1WixEzWQgQ4Wf9id8nBisXYeseKfP7JNcvQMS8Q08X8hCJ8mZ0SGdIhitKRYg8sxUo-xj87g3Rsb_hXKrrOH7X_TLbxM6cltJkTq7BoYF9EJTSk5IwkRZ9ldiI33I8cJGRnX0pUe1EFR2AZH--DAO9Bpc-f0vFUIxD8JmH5K9gtdiDtCcmx4ChN3Q3hmJBqBE-yDr6LuyD4m-EYuC0Q7Yob49GxLSVCljgywn_NEeQd8sh4d7w5WI2wLOM"
+          /><span
+            class="font-headline-sm text-headline-sm text-on-surface tracking-tight"
+            >LogiSwift</span
+          >
+        </div>
+        <nav
+          class="hidden lg:flex items-center gap-space-lg"
+          data-active-classes="text-primary font-headline-sm"
+        >
+          <a
+            aria-current="page"
+            class="transition-colors text-primary font-headline-sm"
+            data-path="home"
+            href="#"
+            >Home</a
+          ><a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="tracking"
+            href="#"
+            >Tracking</a
+          ><a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="products"
+            href="#"
+            >Products</a
+          ><a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="team"
+            href="#"
+            >Team</a
+          ><a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="contact-us"
+            href="#"
+            >Contact Us</a
+          >
+        </nav>
+        <div class="flex items-center gap-space-sm shrink-0">
+          <a
+            aria-label="Account"
+            class="p-space-xs text-on-surface-variant hover:text-on-surface transition-colors rounded-full hover:bg-surface-container-high flex items-center justify-center"
+            data-path="login"
+            href="#"
+            ><span class="material-symbols-outlined">account_circle</span></a
+          ><a
+            class="hidden sm:inline-flex items-center justify-center bg-primary-container text-on-primary font-label-md text-label-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-primary transition-colors"
+            data-path="tracking"
+            href="#"
+            >Ship Now</a
+          ><img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover border border-outline-variant"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy4goiRy1ppWZAwdBIUEeZzQxdz8gIPU2J0EcHd3-FjK7GMsrzEzUFYrnt7wcQx8jggtnf7lFZqp4g6lwK123l15IJyhTF9KnKGQlCVkqGnqefFjOxjPUt7s1iv-ajLFbDixyjkonYZ9D151Od93KUvxFDTXMWpq_SelEHM5qwesib0aO_FT4emKmBFoknGsyQfMy2EGVyoY62DepScNdWMuS6h51MW5M2qwabobWdST3yy73_GMcl"
+          />
+        </div>
+      </div>
+    </header>
+    <main class="w-full min-h-screen bg-surface">
+      <div class="flex flex-col w-full">
+        <!-- Top Ambient Glow & Radial Backdrops -->
+        <div class="relative w-full overflow-hidden">
+          <div
+            class="absolute -top-40 left-1/2 -translate-x-1/2 w-[850px] h-[550px] bg-gradient-to-tr from-primary-fixed-dim/30 via-primary-container/10 to-transparent blur-3xl pointer-events-none -z-10 rounded-full"
+          ></div>
+          <div
+            class="absolute top-96 right-10 w-[420px] h-[420px] bg-secondary-container/20 blur-3xl pointer-events-none -z-10 rounded-full"
+          ></div>
+          <!-- HERO SECTION -->
+          <section
+            class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop pt-space-2xl md:pt-space-3xl pb-space-2xl"
+          >
+            <div
+              class="flex flex-col items-center text-center max-w-4xl mx-auto"
+            >
+              <!-- Live Telemetry Tag -->
+              <div
+                class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container-low text-primary shadow-sm hover:bg-surface-container transition-colors cursor-default mb-space-lg"
+              >
+                <span
+                  class="inline-block w-2 h-2 rounded-full bg-primary animate-ping"
+                ></span>
+                <span
+                  class="font-caption text-caption uppercase tracking-wider font-semibold"
+                  >✦ Real-Time Global Telemetry 2.0 • Zero Friction
+                  Freight</span
+                >
+              </div>
+              <!-- Hero Headline -->
+              <h1
+                class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface tracking-tight mb-space-md"
+              >
+                Fast, Reliable &amp; Seamless<br class="hidden sm:block" />
+                <span
+                  class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-tertiary-container"
+                  >Global Shipping</span
+                >
+              </h1>
+              <!-- Supporting Tagline -->
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-space-xl"
+              >
+                Powering high-velocity commerce with automated routing,
+                transparent end-to-end telemetry, and instant border clearance
+                across 180+ countries.
+              </p>
+              <!-- CTA Buttons -->
+              <div
+                class="flex flex-wrap items-center justify-center gap-space-md mb-space-2xl"
+              >
+                <a
+                  class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary font-label-md text-label-md px-space-xl py-space-sm rounded-lg shadow-sm hover:bg-primary transition-all active:scale-95"
+                  href="#"
+                >
+                  <span>Start Shipping Today</span>
+                  <span class="material-symbols-outlined text-base"
+                    >arrow_forward</span
+                  >
+                </a>
+                <a
+                  class="inline-flex items-center justify-center gap-space-xs bg-surface-container-low text-on-surface font-label-md text-label-md px-space-xl py-space-sm rounded-lg hover:bg-surface-container transition-all"
+                  href="#rates"
+                >
+                  <span>Calculate Rates</span>
+                  <span class="material-symbols-outlined text-base"
+                    >calculate</span
+                  >
+                </a>
+              </div>
+            </div>
+            <!-- FLOATING LIVE TRACKING CONSOLE -->
+            <div
+              class="w-full max-w-4xl mx-auto bg-surface-container-lowest rounded-xl shadow-xl p-space-md md:p-space-xl transition-all"
+            >
+              <!-- Segmented Mode Selectors -->
+              <div
+                class="flex items-center justify-between gap-space-xs overflow-x-auto pb-space-sm border-b-0"
+              >
+                <div
+                  class="inline-flex p-1 bg-surface-container-low rounded-lg gap-1"
+                >
+                  <button
+                    class="tracking-tab-btn px-space-md py-space-xs rounded-md bg-surface-container-lowest text-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-1.5"
+                    id="btnTabTrack"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-base"
+                      >local_shipping</span
+                    >
+                    <span>Shipment Tracking</span>
+                  </button>
+                  <button
+                    class="tracking-tab-btn px-space-md py-space-xs rounded-md text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5"
+                    id="btnTabFreight"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-base"
+                      >flight_takeoff</span
+                    >
+                    <span>Freight Air/Ocean</span>
+                  </button>
+                  <button
+                    class="tracking-tab-btn px-space-md py-space-xs rounded-md text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5"
+                    id="btnTabEstimates"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-base"
+                      >schedule</span
+                    >
+                    <span>Delivery Estimates</span>
+                  </button>
+                </div>
+                <div
+                  class="hidden sm:flex items-center gap-space-xs font-label-code text-label-code text-on-surface-variant"
+                >
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span>API Gateway: Online</span>
+                </div>
+              </div>
+              <!-- Input Bar with Monospace Prefix -->
+              <div class="mt-space-md">
+                <form
+                  class="flex flex-col sm:flex-row items-center gap-space-xs bg-surface-container-low p-1.5 rounded-lg"
+                  id="trackingSearchForm"
+                  onsubmit="
+                    event.preventDefault();
+                    highlightActiveShipment();
+                  "
+                >
+                  <div
+                    class="flex items-center gap-space-xs px-space-sm w-full"
+                  >
+                    <span class="material-symbols-outlined text-primary text-xl"
+                      >inventory_2</span
+                    >
+                    <input
+                      class="w-full bg-transparent font-label-code text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none py-2"
+                      id="resiInput"
+                      placeholder="Enter your tracking / resi number (e.g., LSW-892410-X)..."
+                      type="text"
+                      value="LSW-892410-X"
+                    />
+                    <button
+                      class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container rounded-md transition-colors flex items-center justify-center"
+                      title="Scan Barcode / QR"
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined text-lg"
+                        >qr_code_scanner</span
+                      >
+                    </button>
+                  </div>
+                  <button
+                    class="w-full sm:w-auto shrink-0 bg-primary-container text-on-primary font-label-md text-label-md px-space-xl py-2.5 rounded-lg shadow-sm hover:bg-primary transition-colors flex items-center justify-center gap-space-xs"
+                    type="submit"
+                  >
+                    <span class="material-symbols-outlined text-lg"
+                      >search</span
+                    >
+                    <span>Track Package</span>
+                  </button>
+                </form>
+              </div>
+              <!-- ACTIVE SHIPMENT SIMULATION CARD -->
+              <div
+                class="mt-space-lg bg-surface-container-low/60 rounded-xl p-space-md md:p-space-lg transition-all duration-300"
+                id="shipmentCard"
+              >
+                <!-- Shipment Header -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-md"
+                >
+                  <div>
+                    <div class="flex items-center gap-space-xs flex-wrap">
+                      <span
+                        class="font-label-code text-label-md font-semibold text-primary"
+                        >#LSW-892410-X</span
+                      >
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption"
+                        >Priority Air Express</span
+                      >
+                      <span
+                        class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-100 text-primary font-label-code text-caption font-semibold"
+                      >
+                        <span
+                          class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"
+                        ></span>
+                        IN TRANSIT
+                      </span>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                    >
+                      Austin TX (AUS) ➔ Chicago ORD Hub ➔ New York JFK Terminal
+                      4
+                    </p>
+                  </div>
+                  <div class="text-left sm:text-right">
+                    <span
+                      class="font-caption text-caption text-on-surface-variant uppercase tracking-wider block"
+                      >Estimated Delivery</span
+                    >
+                    <span
+                      class="font-title-md text-title-md font-bold text-on-surface text-primary"
+                      >Today, 4:30 PM EDT</span
+                    >
+                  </div>
+                </div>
+                <!-- 4-Step Interactive Stepper -->
+                <div class="py-space-md relative">
+                  <div
+                    class="hidden md:block absolute top-1/2 left-6 right-6 -translate-y-5 h-0.5 bg-surface-container-highest -z-0"
+                  >
+                    <div
+                      class="h-full bg-primary-container w-[72%] transition-all duration-700"
+                    ></div>
+                  </div>
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-4 gap-space-md relative z-10"
+                  >
+                    <!-- Step 1 -->
+                    <div
+                      class="flex md:flex-col items-start gap-space-sm bg-surface-container-lowest md:bg-transparent p-3 md:p-0 rounded-lg"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-sm"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >check</span
+                        >
+                      </div>
+                      <div>
+                        <h4
+                          class="font-title-md text-body-md font-semibold text-on-surface"
+                        >
+                          Order Created
+                        </h4>
+                        <span
+                          class="font-label-code text-caption text-on-surface-variant block"
+                          >Nov 14 • 08:30 AM</span
+                        >
+                        <span
+                          class="font-caption text-caption text-on-surface-variant"
+                          >Austin Origin Depot, TX</span
+                        >
+                      </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div
+                      class="flex md:flex-col items-start gap-space-sm bg-surface-container-lowest md:bg-transparent p-3 md:p-0 rounded-lg"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-sm"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >check</span
+                        >
+                      </div>
+                      <div>
+                        <h4
+                          class="font-title-md text-body-md font-semibold text-on-surface"
+                        >
+                          Hub Dispatch
+                        </h4>
+                        <span
+                          class="font-label-code text-caption text-on-surface-variant block"
+                          >Nov 15 • 02:15 PM</span
+                        >
+                        <span
+                          class="font-caption text-caption text-on-surface-variant"
+                          >Sorting Hub ORD, IL</span
+                        >
+                      </div>
+                    </div>
+                    <!-- Step 3 (Active) -->
+                    <div
+                      class="flex md:flex-col items-start gap-space-sm bg-primary-fixed/25 md:bg-transparent p-3 md:p-0 rounded-lg"
+                    >
+                      <div
+                        class="relative w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm ring-4 ring-primary/20"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm animate-spin"
+                          >sync</span
+                        >
+                      </div>
+                      <div>
+                        <div class="flex items-center gap-1.5">
+                          <h4
+                            class="font-title-md text-body-md font-bold text-primary"
+                          >
+                            Out for Delivery
+                          </h4>
+                        </div>
+                        <span
+                          class="font-label-code text-caption text-on-surface font-semibold block"
+                          >Today • 09:45 AM</span
+                        >
+                        <span
+                          class="font-caption text-caption text-on-surface-variant"
+                          >Queens District Depot, NY</span
+                        >
+                      </div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div
+                      class="flex md:flex-col items-start gap-space-sm bg-surface-container-lowest/50 md:bg-transparent p-3 md:p-0 rounded-lg opacity-70"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >location_on</span
+                        >
+                      </div>
+                      <div>
+                        <h4
+                          class="font-title-md text-body-md font-semibold text-on-surface-variant"
+                        >
+                          Delivered
+                        </h4>
+                        <span
+                          class="font-label-code text-caption text-on-surface-variant block"
+                          >Est. 04:30 PM</span
+                        >
+                        <span
+                          class="font-caption text-caption text-on-surface-variant"
+                          >Front Door / Reception</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Bottom Telemetry Banner with Courier info -->
+                <div
+                  class="mt-space-sm pt-space-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs font-body-sm text-body-sm text-on-surface-variant"
+                >
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >delivery_dining</span
+                    >
+                    <span
+                      >Assigned Driver:
+                      <strong class="text-on-surface font-semibold"
+                        >Marcus V.</strong
+                      >
+                      • Vehicle Electric Van #429</span
+                    >
+                  </div>
+                  <div
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-code text-caption"
+                  >
+                    <span
+                      class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+                    ></span>
+                    <span>4 stops away (approx. 38 mins)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- KEY METRICS / TRUST TICKER -->
+        <section
+          class="w-full bg-surface-container-lowest py-space-xl shadow-sm"
+        >
+          <div
+            class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop"
+          >
+            <div
+              class="grid grid-cols-2 lg:grid-cols-4 gap-space-lg text-center"
+            >
+              <!-- Metric 1 -->
+              <div class="flex flex-col items-center">
+                <span
+                  class="font-display-lg text-headline-lg md:text-display-lg text-primary font-bold tracking-tight"
+                  >99.94%</span
+                >
+                <span
+                  class="font-title-md text-body-md font-semibold text-on-surface mt-1"
+                  >On-Time Delivery Rate</span
+                >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >Audited multi-carrier SLA</span
+                >
+              </div>
+              <!-- Metric 2 -->
+              <div class="flex flex-col items-center">
+                <span
+                  class="font-display-lg text-headline-lg md:text-display-lg text-on-surface font-bold tracking-tight"
+                  >180+</span
+                >
+                <span
+                  class="font-title-md text-body-md font-semibold text-on-surface mt-1"
+                  >Countries Covered</span
+                >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >Direct customs clearing lanes</span
+                >
+              </div>
+              <!-- Metric 3 -->
+              <div class="flex flex-col items-center">
+                <span
+                  class="font-display-lg text-headline-lg md:text-display-lg text-primary-container font-bold tracking-tight"
+                  >4.2M+</span
+                >
+                <span
+                  class="font-title-md text-body-md font-semibold text-on-surface mt-1"
+                  >Monthly Packages</span
+                >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >Live telemetry telemetry pipeline</span
+                >
+              </div>
+              <!-- Metric 4 -->
+              <div class="flex flex-col items-center">
+                <span
+                  class="font-display-lg text-headline-lg md:text-display-lg text-on-surface font-bold tracking-tight"
+                  >&lt;15 min</span
+                >
+                <span
+                  class="font-title-md text-body-md font-semibold text-on-surface mt-1"
+                  >Customs Clearance</span
+                >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >AI HS-code compliance engine</span
+                >
+              </div>
+            </div>
+            <!-- Trust Brand Logos Bar -->
+            <div
+              class="mt-space-xl pt-space-lg flex flex-wrap items-center justify-center gap-space-xl md:gap-space-2xl opacity-60"
+            >
+              <div
+                class="flex items-center gap-1.5 font-label-md text-label-md tracking-wider uppercase text-on-surface"
+              >
+                <span class="material-symbols-outlined text-primary text-xl"
+                  >corporate_fare</span
+                >
+                <span>AEROFREIGHT</span>
+              </div>
+              <div
+                class="flex items-center gap-1.5 font-label-md text-label-md tracking-wider uppercase text-on-surface"
+              >
+                <span class="material-symbols-outlined text-primary text-xl"
+                  >token</span
+                >
+                <span>SYNERGY CARGO</span>
+              </div>
+              <div
+                class="flex items-center gap-1.5 font-label-md text-label-md tracking-wider uppercase text-on-surface"
+              >
+                <span class="material-symbols-outlined text-primary text-xl"
+                  >hub</span
+                >
+                <span>VANTAGE NEXUS</span>
+              </div>
+              <div
+                class="flex items-center gap-1.5 font-label-md text-label-md tracking-wider uppercase text-on-surface"
+              >
+                <span class="material-symbols-outlined text-primary text-xl"
+                  >anchor</span
+                >
+                <span>OCEANIC ALLIANCE</span>
+              </div>
+              <div
+                class="flex items-center gap-1.5 font-label-md text-label-md tracking-wider uppercase text-on-surface"
+              >
+                <span class="material-symbols-outlined text-primary text-xl"
+                  >diamond</span
+                >
+                <span>GLOBAL COLDCHAIN</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- PRODUCTS & SERVICES SECTION -->
+        <section
+          class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop py-space-3xl w-full"
+        >
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg mb-space-2xl"
+          >
+            <div class="max-w-2xl">
+              <span
+                class="font-caption text-caption uppercase tracking-wider text-primary font-semibold block mb-space-xs"
+                >SERVICES &amp; INFRASTRUCTURE</span
+              >
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                Precision Logistics Tailored for Scale
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+                Flexible fulfillment and transit solutions engineered for speed,
+                security, and lower carbon footprints.
+              </p>
+            </div>
+            <a
+              class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:text-primary-container font-semibold"
+              href="#"
+            >
+              <span>Explore All Freight Specs</span>
+              <span class="material-symbols-outlined text-base"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+          <!-- 4-Card Responsive Grid -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg"
+          >
+            <!-- Service Card 1 -->
+            <div
+              class="group bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-container-low text-primary flex items-center justify-center mb-space-lg group-hover:bg-primary group-hover:text-on-primary transition-colors"
+                >
+                  <span class="material-symbols-outlined text-2xl">bolt</span>
+                </div>
+                <h3
+                  class="font-headline-sm text-headline-sm text-on-surface mb-space-xs"
+                >
+                  Express Delivery
+                </h3>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant mb-space-md"
+                >
+                  Guaranteed same-day and next-day local shipping with
+                  point-to-point GPS verification and doorstep photo proof.
+                </p>
+                <ul class="space-y-2 mb-space-lg">
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Under 2hr urban dispatch</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Cold-chain compliant</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Weekend delivery included</span>
+                  </li>
+                </ul>
+              </div>
+              <a
+                class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold group-hover:gap-2 transition-all"
+                href="#"
+              >
+                <span>Learn More</span>
+                <span class="material-symbols-outlined text-sm"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+            <!-- Service Card 2 -->
+            <div
+              class="group bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-container-low text-primary flex items-center justify-center mb-space-lg group-hover:bg-primary group-hover:text-on-primary transition-colors"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >local_shipping</span
+                  >
+                </div>
+                <h3
+                  class="font-headline-sm text-headline-sm text-on-surface mb-space-xs"
+                >
+                  Inter-city Freight
+                </h3>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant mb-space-md"
+                >
+                  Reliable overland cargo handling with dedicated fleet
+                  allocations, consolidated LTL &amp; FTL freight options.
+                </p>
+                <ul class="space-y-2 mb-space-lg">
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Real-time temperature logging</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Direct depot routing</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Full-load protection</span>
+                  </li>
+                </ul>
+              </div>
+              <a
+                class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold group-hover:gap-2 transition-all"
+                href="#"
+              >
+                <span>Learn More</span>
+                <span class="material-symbols-outlined text-sm"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+            <!-- Service Card 3 -->
+            <div
+              class="group bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-container-low text-primary flex items-center justify-center mb-space-lg group-hover:bg-primary group-hover:text-on-primary transition-colors"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >flight_takeoff</span
+                  >
+                </div>
+                <h3
+                  class="font-headline-sm text-headline-sm text-on-surface mb-space-xs"
+                >
+                  International Shipping
+                </h3>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant mb-space-md"
+                >
+                  Cross-border logistics streamlined with automated customs
+                  clearance, tax harmonization, and air/ocean lanes.
+                </p>
+                <ul class="space-y-2 mb-space-lg">
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Automated HS code matching</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Door-to-door tracking</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Customs bonded hubs</span>
+                  </li>
+                </ul>
+              </div>
+              <a
+                class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold group-hover:gap-2 transition-all"
+                href="#"
+              >
+                <span>Learn More</span>
+                <span class="material-symbols-outlined text-sm"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+            <!-- Service Card 4 -->
+            <div
+              class="group bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-container-low text-primary flex items-center justify-center mb-space-lg group-hover:bg-primary group-hover:text-on-primary transition-colors"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >warehouse</span
+                  >
+                </div>
+                <h3
+                  class="font-headline-sm text-headline-sm text-on-surface mb-space-xs"
+                >
+                  Enterprise Logistics
+                </h3>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant mb-space-md"
+                >
+                  Tailored supply chain workflows, custom ERP integration,
+                  automated multi-warehouse fulfillment, and volume discounts.
+                </p>
+                <ul class="space-y-2 mb-space-lg">
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>REST API &amp; Webhooks</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Dedicated account strategist</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-base"
+                      >check_circle</span
+                    >
+                    <span>Automated SLA refunds</span>
+                  </li>
+                </ul>
+              </div>
+              <a
+                class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold group-hover:gap-2 transition-all"
+                href="#"
+              >
+                <span>Learn More</span>
+                <span class="material-symbols-outlined text-sm"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
+        <!-- LIVE ROUTE & TELEMETRY SHOWCASE SECTION -->
+        <section class="w-full bg-surface-container-low py-space-3xl">
+          <div
+            class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop"
+          >
+            <div
+              class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center"
+            >
+              <!-- Interactive Telemetry Visualizer -->
+              <div
+                class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-space-lg md:p-space-xl shadow-md"
+              >
+                <div class="flex items-center justify-between pb-space-md">
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"
+                    ></span>
+                    <span
+                      class="font-title-md text-title-md font-bold text-on-surface"
+                      >Telemetry Radar • Atlantic Freight Corridor</span
+                    >
+                  </div>
+                  <span
+                    class="font-label-code text-label-code text-on-surface-variant"
+                    >ACTIVE NODE 44-EAST</span
+                  >
+                </div>
+                <!-- Stylized Telemetry SVG Map Graphic -->
+                <div
+                  class="w-full h-72 rounded-lg bg-inverse-surface relative overflow-hidden flex items-center justify-center p-4 text-inverse-on-surface"
+                >
+                  <!-- Background Grid SVG -->
+                  <svg
+                    class="absolute inset-0 w-full h-full opacity-20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <pattern
+                        height="40"
+                        id="gridPattern"
+                        patternunits="userSpaceOnUse"
+                        width="40"
+                      >
+                        <path
+                          d="M 40 0 L 0 0 0 40"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1"
+                        ></path>
+                      </pattern>
+                    </defs>
+                    <rect
+                      fill="url(#gridPattern)"
+                      height="100%"
+                      width="100%"
+                    ></rect>
+                  </svg>
+                  <!-- Interactive Transit Path Line -->
+                  <svg
+                    class="absolute inset-0 w-full h-full"
+                    fill="none"
+                    viewbox="0 0 600 280"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <!-- Route Path -->
+                    <path
+                      d="M 80 180 C 180 80, 360 80, 520 160"
+                      stroke="#3b82f6"
+                      stroke-dasharray="6 6"
+                      stroke-width="3"
+                    ></path>
+                    <!-- Completed Sub-path -->
+                    <path
+                      d="M 80 180 C 180 80, 290 80, 330 95"
+                      stroke="#60a5fa"
+                      stroke-width="4"
+                    ></path>
+                    <!-- Origin Circle -->
+                    <circle cx="80" cy="180" fill="#60a5fa" r="6"></circle>
+                    <circle
+                      cx="80"
+                      cy="180"
+                      opacity="0.5"
+                      r="12"
+                      stroke="#60a5fa"
+                      stroke-width="1.5"
+                    ></circle>
+                    <!-- Target Circle -->
+                    <circle cx="520" cy="160" fill="#94a3b8" r="6"></circle>
+                    <!-- Moving Carrier Marker -->
+                    <circle cx="330" cy="95" fill="#ffffff" r="7"></circle>
+                    <circle
+                      class="animate-ping"
+                      cx="330"
+                      cy="95"
+                      opacity="0.75"
+                      r="14"
+                      stroke="#ffffff"
+                      stroke-width="2"
+                    ></circle>
+                  </svg>
+                  <!-- Floating Telemetry Badges inside Visualizer -->
+                  <div
+                    class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur text-on-surface px-space-sm py-1.5 rounded-lg shadow font-label-code text-caption flex items-center gap-2"
+                  >
+                    <span class="material-symbols-outlined text-primary text-sm"
+                      >flight</span
+                    >
+                    <span>Cargo Flight LSW-802 (Boeing 777F)</span>
+                  </div>
+                  <div
+                    class="absolute bottom-4 right-4 bg-surface-container-lowest/90 backdrop-blur text-on-surface px-space-sm py-1.5 rounded-lg shadow font-label-code text-caption flex items-center gap-2"
+                  >
+                    <span
+                      class="material-symbols-outlined text-emerald-600 text-sm"
+                      >thermostat</span
+                    >
+                    <span>Cargo Hold Temp: +4.2°C (Optimal)</span>
+                  </div>
+                </div>
+                <!-- Bottom Telemetry Stats Bar -->
+                <div
+                  class="grid grid-cols-3 gap-space-sm pt-space-md text-center"
+                >
+                  <div class="p-2 rounded bg-surface-container-low">
+                    <span
+                      class="font-caption text-caption text-on-surface-variant block"
+                      >Ground Speed</span
+                    >
+                    <span
+                      class="font-title-md text-body-md font-bold text-on-surface"
+                      >542 kts</span
+                    >
+                  </div>
+                  <div class="p-2 rounded bg-surface-container-low">
+                    <span
+                      class="font-caption text-caption text-on-surface-variant block"
+                      >Altitude</span
+                    >
+                    <span
+                      class="font-title-md text-body-md font-bold text-on-surface"
+                      >36,000 ft</span
+                    >
+                  </div>
+                  <div class="p-2 rounded bg-surface-container-low">
+                    <span
+                      class="font-caption text-caption text-on-surface-variant block"
+                      >ETA Waypoint</span
+                    >
+                    <span
+                      class="font-title-md text-body-md font-bold text-primary font-label-code"
+                      >14:18 UTC</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- Telemetry Copy Column -->
+              <div class="lg:col-span-5 space-y-space-md">
+                <span
+                  class="font-caption text-caption uppercase tracking-wider text-primary font-semibold block"
+                  >INTELLIGENT TELEMATICS</span
+                >
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                  Sensor-to-Screen Live Visibility
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Every shipment dispatched through LogiSwift is tied directly
+                  to real-time IoT beacons. Track exact internal temperatures,
+                  tilt alerts, shock incidents, and dynamic route adjustments
+                  around airspace disruptions.
+                </p>
+                <div class="space-y-space-sm pt-space-xs">
+                  <div class="flex items-start gap-space-sm">
+                    <div
+                      class="w-8 h-8 rounded-full bg-surface-container-highest text-primary flex items-center justify-center shrink-0"
+                    >
+                      <span class="material-symbols-outlined text-base"
+                        >sensors</span
+                      >
+                    </div>
+                    <div>
+                      <h4
+                        class="font-title-md text-body-md font-semibold text-on-surface"
+                      >
+                        Micro-Telemetry Sensors
+                      </h4>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Monitors G-force impact, ambient moisture, and thermal
+                        deviations in real time.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-space-sm">
+                    <div
+                      class="w-8 h-8 rounded-full bg-surface-container-highest text-primary flex items-center justify-center shrink-0"
+                    >
+                      <span class="material-symbols-outlined text-base"
+                        >route</span
+                      >
+                    </div>
+                    <div>
+                      <h4
+                        class="font-title-md text-body-md font-semibold text-on-surface"
+                      >
+                        Predictive Dynamic Rerouting
+                      </h4>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        AI engines bypass congested ports and severe weather
+                        before delays materialize.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- LEADERSHIP & TEAM SECTION -->
+        <section
+          class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop py-space-3xl w-full"
+        >
+          <div class="text-center max-w-3xl mx-auto mb-space-2xl">
+            <span
+              class="font-caption text-caption uppercase tracking-wider text-primary font-semibold block mb-space-xs"
+              >OUR PEOPLE</span
+            >
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">
+              Built by Logistics Pioneers
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+              Meet the operators, engineers, and supply chain veterans building
+              the future of autonomous cargo orchestration.
+            </p>
+          </div>
+          <!-- Team Grid (4 cards) -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg"
+          >
+            <!-- Member 1: Elena Rostova (Mandatory Image) -->
+            <div
+              class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="relative w-full aspect-square overflow-hidden bg-surface-container"
+                >
+                  <img
+                    alt="Elena Rostova, CEO"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy4goiRy1ppWZAwdBIUEeZzQxdz8gIPU2J0EcHd3-FjK7GMsrzEzUFYrnt7wcQx8jggtnf7lFZqp4g6lwK123l15IJyhTF9KnKGQlCVkqGnqefFjOxjPUt7s1iv-ajLFbDixyjkonYZ9D151Od93KUvxFDTXMWpq_SelEHM5qwesib0aO_FT4emKmBFoknGsyQfMy2EGVyoY62DepScNdWMuS6h51MW5M2qwabobWdST3yy73_GMcl"
+                  />
+                  <div
+                    class="absolute top-3 right-3 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur font-caption text-caption font-semibold text-primary"
+                  >
+                    Executive
+                  </div>
+                </div>
+                <div class="p-space-lg">
+                  <h3
+                    class="font-headline-sm text-title-md font-bold text-on-surface"
+                  >
+                    Elena Rostova
+                  </h3>
+                  <span
+                    class="font-caption text-caption text-primary font-semibold block mb-2"
+                    >Chief Executive Officer</span
+                  >
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Founder &amp; Ex-Supply Chain Director at DHL/Maersk with
+                    18+ years running pan-continental marine &amp; freight
+                    fleets.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="px-space-lg pb-space-lg flex items-center justify-between pt-space-xs border-t-0"
+              >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >Global Strategy</span
+                >
+                <a
+                  aria-label="Elena LinkedIn Profile"
+                  class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-sm">share</span>
+                </a>
+              </div>
+            </div>
+            <!-- Member 2: David Chen -->
+            <div
+              class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="relative w-full aspect-square overflow-hidden bg-surface-container flex items-center justify-center"
+                >
+                  <div
+                    class="w-full h-full bg-gradient-to-tr from-surface-container-high via-surface-container to-surface-container-low flex flex-col items-center justify-center p-6 text-center"
+                  >
+                    <div
+                      class="w-24 h-24 rounded-full bg-surface-container-highest text-primary flex items-center justify-center mb-3 shadow-inner"
+                    >
+                      <span class="material-symbols-outlined text-4xl"
+                        >terminal</span
+                      >
+                    </div>
+                    <span
+                      class="font-label-code text-caption text-on-surface-variant font-semibold"
+                      >CTO • Telematics Architecture</span
+                    >
+                  </div>
+                  <div
+                    class="absolute top-3 right-3 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur font-caption text-caption font-semibold text-primary"
+                  >
+                    Engineering
+                  </div>
+                </div>
+                <div class="p-space-lg">
+                  <h3
+                    class="font-headline-sm text-title-md font-bold text-on-surface"
+                  >
+                    David Chen
+                  </h3>
+                  <span
+                    class="font-caption text-caption text-primary font-semibold block mb-2"
+                    >Chief Technology Officer</span
+                  >
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Former Head of Autonomous Fleet Telematics at leading
+                    robotics dispatch labs. Specializes in distributed
+                    distributed event mesh systems.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="px-space-lg pb-space-lg flex items-center justify-between pt-space-xs border-t-0"
+              >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >Systems &amp; Platform</span
+                >
+                <a
+                  aria-label="David LinkedIn Profile"
+                  class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-sm">share</span>
+                </a>
+              </div>
+            </div>
+            <!-- Member 3: Amara Okafor -->
+            <div
+              class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="relative w-full aspect-square overflow-hidden bg-surface-container flex items-center justify-center"
+                >
+                  <div
+                    class="w-full h-full bg-gradient-to-tr from-surface-container-high via-surface-container to-surface-container-low flex flex-col items-center justify-center p-6 text-center"
+                  >
+                    <div
+                      class="w-24 h-24 rounded-full bg-surface-container-highest text-primary flex items-center justify-center mb-3 shadow-inner"
+                    >
+                      <span class="material-symbols-outlined text-4xl"
+                        >public</span
+                      >
+                    </div>
+                    <span
+                      class="font-label-code text-caption text-on-surface-variant font-semibold"
+                      >COO • Operations Network</span
+                    >
+                  </div>
+                  <div
+                    class="absolute top-3 right-3 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur font-caption text-caption font-semibold text-primary"
+                  >
+                    Operations
+                  </div>
+                </div>
+                <div class="p-space-lg">
+                  <h3
+                    class="font-headline-sm text-title-md font-bold text-on-surface"
+                  >
+                    Amara Okafor
+                  </h3>
+                  <span
+                    class="font-caption text-caption text-primary font-semibold block mb-2"
+                    >Head of Global Operations</span
+                  >
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Overseeing physical freight terminals, cross-border bonded
+                    facilities, and ground handling teams across EMEA &amp;
+                    Americas.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="px-space-lg pb-space-lg flex items-center justify-between pt-space-xs border-t-0"
+              >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >Global Hubs</span
+                >
+                <a
+                  aria-label="Amara LinkedIn Profile"
+                  class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-sm">share</span>
+                </a>
+              </div>
+            </div>
+            <!-- Member 4: Soren Lindqvist -->
+            <div
+              class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="relative w-full aspect-square overflow-hidden bg-surface-container flex items-center justify-center"
+                >
+                  <div
+                    class="w-full h-full bg-gradient-to-tr from-surface-container-high via-surface-container to-surface-container-low flex flex-col items-center justify-center p-6 text-center"
+                  >
+                    <div
+                      class="w-24 h-24 rounded-full bg-surface-container-highest text-primary flex items-center justify-center mb-3 shadow-inner"
+                    >
+                      <span class="material-symbols-outlined text-4xl"
+                        >route</span
+                      >
+                    </div>
+                    <span
+                      class="font-label-code text-caption text-on-surface-variant font-semibold"
+                      >Lead AI • Routing Algorithms</span
+                    >
+                  </div>
+                  <div
+                    class="absolute top-3 right-3 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur font-caption text-caption font-semibold text-primary"
+                  >
+                    Algorithm Lab
+                  </div>
+                </div>
+                <div class="p-space-lg">
+                  <h3
+                    class="font-headline-sm text-title-md font-bold text-on-surface"
+                  >
+                    Soren Lindqvist
+                  </h3>
+                  <span
+                    class="font-caption text-caption text-primary font-semibold block mb-2"
+                    >Lead Optimization Engineer</span
+                  >
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Specialist in combinatorial routing graphs, multi-modal
+                    predictive transit planning, and fleet fuel economy
+                    reduction algorithms.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="px-space-lg pb-space-lg flex items-center justify-between pt-space-xs border-t-0"
+              >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >Route Topology</span
+                >
+                <a
+                  aria-label="Soren LinkedIn Profile"
+                  class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-sm">share</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- INTERACTIVE RATE CALCULATOR ACCORDION / ESTIMATOR -->
+        <section class="w-full bg-surface py-space-2xl" id="rates">
+          <div
+            class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop"
+          >
+            <div
+              class="bg-surface-container-lowest rounded-xl p-space-lg md:p-space-2xl shadow-md"
+            >
+              <div class="max-w-xl mb-space-xl">
+                <span
+                  class="font-caption text-caption uppercase tracking-wider text-primary font-semibold block mb-1"
+                  >INSTANT QUOTE ESTIMATOR</span
+                >
+                <h2
+                  class="font-headline-lg text-headline-sm md:text-headline-lg text-on-surface"
+                >
+                  Calculate Real-Time Shipping Rates
+                </h2>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                >
+                  Get immediate pricing estimates with transparent port duties
+                  and carrier surcharges.
+                </p>
+              </div>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md"
+              >
+                <div class="space-y-1">
+                  <label
+                    class="font-label-md text-label-md text-on-surface font-semibold block"
+                    >Origin City / Hub</label
+                  >
+                  <div
+                    class="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-lg"
+                  >
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant text-base"
+                      >trip_origin</span
+                    >
+                    <input
+                      class="bg-transparent font-body-sm text-body-sm text-on-surface w-full focus:outline-none"
+                      id="calcOrigin"
+                      type="text"
+                      value="Austin, TX (USA)"
+                    />
+                  </div>
+                </div>
+                <div class="space-y-1">
+                  <label
+                    class="font-label-md text-label-md text-on-surface font-semibold block"
+                    >Destination City</label
+                  >
+                  <div
+                    class="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-lg"
+                  >
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant text-base"
+                      >location_on</span
+                    >
+                    <input
+                      class="bg-transparent font-body-sm text-body-sm text-on-surface w-full focus:outline-none"
+                      id="calcDest"
+                      type="text"
+                      value="Frankfurt (FRA), Germany"
+                    />
+                  </div>
+                </div>
+                <div class="space-y-1">
+                  <label
+                    class="font-label-md text-label-md text-on-surface font-semibold block"
+                    >Cargo Weight (KG)</label
+                  >
+                  <div
+                    class="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-lg"
+                  >
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant text-base"
+                      >weight</span
+                    >
+                    <input
+                      class="bg-transparent font-body-sm text-body-sm text-on-surface w-full focus:outline-none"
+                      id="calcWeight"
+                      type="number"
+                      value="25"
+                    />
+                  </div>
+                </div>
+                <div class="flex items-end">
+                  <button
+                    class="w-full bg-primary text-on-primary font-label-md text-label-md py-2.5 rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2"
+                    onclick="calculateInstantQuote()"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-base"
+                      >bolt</span
+                    >
+                    <span>Get Live Estimate</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Dynamic Output Container -->
+              <div
+                class="mt-space-lg p-space-md rounded-lg bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md transition-all"
+                id="quoteResult"
+              >
+                <div class="flex items-center gap-space-md">
+                  <div
+                    class="w-10 h-10 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0"
+                  >
+                    <span class="material-symbols-outlined text-xl"
+                      >verified</span
+                    >
+                  </div>
+                  <div>
+                    <span
+                      class="font-caption text-caption text-primary font-semibold uppercase"
+                      >Estimated Tier: Air Priority Express</span
+                    >
+                    <p
+                      class="font-title-md text-title-md font-bold text-on-surface"
+                    >
+                      Estimated Cost:
+                      <span id="calculatedPrice">$184.50</span> USD • 2-3
+                      Business Days
+                    </p>
+                    <span
+                      class="font-caption text-caption text-on-surface-variant"
+                      >Includes airport handling charges, automated customs
+                      documentation &amp; end-to-end telemetry</span
+                    >
+                  </div>
+                </div>
+                <button
+                  class="w-full md:w-auto px-space-lg py-2 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all shadow-sm"
+                  type="button"
+                >
+                  Book Shipment Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- INTERACTIVE CALL TO ACTION BANNER -->
+        <section
+          class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop py-space-3xl w-full"
+        >
+          <div
+            class="relative overflow-hidden rounded-2xl bg-inverse-surface text-inverse-on-surface p-space-xl md:p-space-3xl shadow-xl"
+          >
+            <!-- Decorative Backdrop Graphic -->
+            <div
+              class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-primary/20 blur-3xl pointer-events-none"
+            ></div>
+            <div
+              class="absolute -left-20 -top-20 w-96 h-96 rounded-full bg-primary-container/20 blur-3xl pointer-events-none"
+            ></div>
+            <div class="relative z-10 max-w-3xl">
+              <span
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/30 text-inverse-primary font-label-code text-caption font-semibold mb-space-md"
+              >
+                <span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
+                GLOBAL SCALE READY
+              </span>
+              <h2
+                class="font-display-lg text-display-lg-mobile md:text-display-lg text-inverse-on-surface tracking-tight mb-space-md"
+              >
+                Ready to modernize your parcel &amp; freight operations?
+              </h2>
+              <p
+                class="font-body-lg text-body-lg text-inverse-on-surface/80 mb-space-xl max-w-2xl"
+              >
+                Join over 14,000 global forwarders and high-growth retail brands
+                utilizing LogiSwift for real-time visibility, automated customs
+                clearance, and carbon-neutral transit lanes.
+              </p>
+              <!-- CTA Action Buttons -->
+              <div class="flex flex-wrap items-center gap-space-md mb-space-lg">
+                <a
+                  class="inline-flex items-center gap-space-xs bg-primary text-on-primary font-label-md text-label-md px-space-xl py-space-sm rounded-lg shadow-md hover:bg-primary-container transition-all active:scale-95"
+                  href="#"
+                >
+                  <span>Create Free Account</span>
+                  <span class="material-symbols-outlined text-base"
+                    >rocket_launch</span
+                  >
+                </a>
+                <a
+                  class="inline-flex items-center gap-space-xs bg-inverse-surface/60 border border-outline/30 text-inverse-on-surface font-label-md text-label-md px-space-xl py-space-sm rounded-lg hover:bg-inverse-surface transition-all"
+                  href="#"
+                >
+                  <span>Talk to a Shipping Specialist</span>
+                  <span class="material-symbols-outlined text-base"
+                    >support_agent</span
+                  >
+                </a>
+              </div>
+              <!-- Trust Features -->
+              <div
+                class="flex flex-wrap items-center gap-space-md md:gap-space-xl pt-space-xs text-inverse-on-surface/70 font-caption text-caption"
+              >
+                <span class="flex items-center gap-1">
+                  <span
+                    class="material-symbols-outlined text-primary-fixed text-base"
+                    >check_circle</span
+                  >
+                  No credit card required
+                </span>
+                <span class="flex items-center gap-1">
+                  <span
+                    class="material-symbols-outlined text-primary-fixed text-base"
+                    >check_circle</span
+                  >
+                  Instant API sandbox access
+                </span>
+                <span class="flex items-center gap-1">
+                  <span
+                    class="material-symbols-outlined text-primary-fixed text-base"
+                    >check_circle</span
+                  >
+                  24/7 dedicated control tower support
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- CLIENT-SIDE INTERACTION SCRIPT -->
+        <script>
+          function highlightActiveShipment() {
+            const card = document.getElementById("shipmentCard");
+            const inputVal = document.getElementById("resiInput").value.trim();
+            if (!card) return;
+
+            // Pulse visual effect
+            card.classList.remove("bg-surface-container-low/60");
+            card.classList.add("bg-primary-fixed/20", "scale-[1.01]");
+
+            setTimeout(() => {
+              card.classList.remove("bg-primary-fixed/20", "scale-[1.01]");
+              card.classList.add("bg-surface-container-low/60");
+            }, 700);
+          }
+
+          function calculateInstantQuote() {
+            const weight = parseFloat(
+              document.getElementById("calcWeight")?.value || "1",
+            );
+            const priceElem = document.getElementById("calculatedPrice");
+            if (priceElem) {
+              // Simple mock calculation logic
+              const baseRate = 34.5;
+              const perKg = 6.0;
+              const total = (baseRate + weight * perKg).toFixed(2);
+              priceElem.textContent = "$" + total;
+            }
+          }
+
+          // Segmented tab switching
+          document.querySelectorAll(".tracking-tab-btn").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              document.querySelectorAll(".tracking-tab-btn").forEach((b) => {
+                b.classList.remove(
+                  "bg-surface-container-lowest",
+                  "text-primary",
+                  "shadow-sm",
+                );
+                b.classList.add("text-on-surface-variant");
+              });
+              this.classList.remove("text-on-surface-variant");
+              this.classList.add(
+                "bg-surface-container-lowest",
+                "text-primary",
+                "shadow-sm",
+              );
+            });
+          });
+        </script>
+      </div>
+    </main>
+    <footer
+      class="w-full bg-surface-container-lowest border-t border-outline-variant"
+    >
+      <div
+        class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin-desktop pt-space-3xl pb-space-xl"
+      >
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl mb-space-2xl"
+        >
+          <div class="lg:col-span-2 space-y-space-md">
+            <div class="flex items-center gap-space-sm">
+              <img
+                alt="LogiSwift Logo"
+                class="h-7 w-auto object-contain"
+                src="https://lh3.googleusercontent.com/aida/AEtjO1WixEzWQgQ4Wf9id8nBisXYeseKfP7JNcvQMS8Q08X8hCJ8mZ0SGdIhitKRYg8sxUo-xj87g3Rsb_hXKrrOH7X_TLbxM6cltJkTq7BoYF9EJTSk5IwkRZ9ldiI33I8cJGRnX0pUe1EFR2AZH--DAO9Bpc-f0vFUIxD8JmH5K9gtdiDtCcmx4ChN3Q3hmJBqBE-yDr6LuyD4m-EYuC0Q7Yob49GxLSVCljgywn_NEeQd8sh4d7w5WI2wLOM"
+              /><span
+                class="font-headline-sm text-headline-sm text-on-surface tracking-tight"
+                >LogiSwift</span
+              >
+            </div>
+            <p
+              class="font-body-md text-body-md text-on-surface-variant max-w-sm"
+            >
+              Next-generation logistics infrastructure powering speed,
+              transparency, and global reach for modern commerce.
+            </p>
+            <div class="flex items-center gap-space-sm pt-space-xs">
+              <a
+                aria-label="Global Network"
+                class="w-9 h-9 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors"
+                href="#"
+                ><span class="material-symbols-outlined text-base"
+                  >public</span
+                ></a
+              ><a
+                aria-label="Developer Hub"
+                class="w-9 h-9 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors"
+                href="#"
+                ><span class="material-symbols-outlined text-base"
+                  >terminal</span
+                ></a
+              ><a
+                aria-label="Logistics Updates"
+                class="w-9 h-9 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors"
+                href="#"
+                ><span class="material-symbols-outlined text-base"
+                  >rss_feed</span
+                ></a
+              >
+            </div>
+          </div>
+          <div class="space-y-space-sm">
+            <h3 class="font-title-md text-title-md text-on-surface">
+              Services
+            </h3>
+            <ul class="space-y-space-xs">
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                Air Freight Direct
+              </li>
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                Ocean FCL/LCL
+              </li>
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                Intermodal Express
+              </li>
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                Customs Brokerage
+              </li>
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                Warehouse Automation
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-space-sm">
+            <h3 class="font-title-md text-title-md text-on-surface">
+              Tracking &amp; Tools
+            </h3>
+            <ul class="space-y-space-xs">
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                Live Telemetry Map
+              </li>
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                AWB Query Engine
+              </li>
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                Rate Calculator
+              </li>
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                API Documentation
+              </li>
+              <li
+                class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer"
+              >
+                Incident Status
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-space-sm">
+            <h3 class="font-title-md text-title-md text-on-surface">
+              Stay Updated
+            </h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+              Subscribe to our weekly dispatch of global shipping analytics and
+              trade lane alerts.
+            </p>
+            <div class="flex flex-col gap-space-xs">
+              <input
+                class="w-full px-space-sm py-space-xs bg-surface-container-lowest border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary"
+                placeholder="Enter your business email"
+                type="email"
+              /><button
+                class="w-full bg-primary text-on-primary font-label-md text-label-md py-space-xs rounded-lg hover:bg-primary-container transition-colors"
+                type="button"
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="pt-space-lg border-t border-outline-variant flex flex-col md:flex-row items-center justify-between gap-space-md"
+        >
+          <span class="font-caption text-caption text-on-surface-variant"
+            >© 2025 LogiSwift Worldwide Technologies Inc. All rights
+            reserved.</span
+          >
+          <div class="flex items-center gap-space-md">
+            <a
+              class="font-caption text-caption text-on-surface-variant hover:text-on-surface"
+              href="#"
+              >Privacy Policy</a
+            ><a
+              class="font-caption text-caption text-on-surface-variant hover:text-on-surface"
+              href="#"
+              >Terms of Service</a
+            ><a
+              class="font-caption text-caption text-on-surface-variant hover:text-on-surface"
+              href="#"
+              >Security Compliance</a
+            ><a
+              class="font-caption text-caption text-on-surface-variant hover:text-on-surface"
+              href="#"
+              >Port Tariffs</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
