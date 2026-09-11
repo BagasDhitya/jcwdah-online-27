@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Beras Putih Pandan Wangi Super 5kg",
+    "description": "Beras putih lokal kualitas premium dengan aroma wangi alami pandan, pulen, dan bebas bahan pengawet.",
+    "stock": 50,
+    "price": 78000
+  },
+  {
+    "id": 2,
+    "title": "Minyak Goreng Sawit Bimoli Refill 2L",
+    "description": "Minyak goreng dari kelapa sawit pilihan, kaya akan Omega 9 dan Vitamin E untuk hasil gorengan garing renyah.",
+    "stock": 35,
+    "price": 38500
+  },
+  {
+    "id": 3,
+    "title": "Gula Pasir Kristal Putih Gulaku 1kg",
+    "description": "Gula pasir tebu murni berkualitas tinggi, higienis, dan mudah larut untuk berbagai minuman serta olahan makanan.",
+    "stock": 40,
+    "price": 17500
+  },
+  {
+    "id": 4,
+    "title": "Tepung Terigu Segitiga Biru 1kg",
+    "description": "Tepung terigu serbaguna berprotein sedang, cocok untuk membuat aneka kue basah, martabak, gorengan, dan bolu.",
+    "stock": 30,
+    "price": 13000
+  },
+  {
+    "id": 5,
+    "title": "Kecap Manis Bango Reffil 520ml",
+    "description": "Kecap manis legendaris dari kedelai hitam berkualitas Mallika, menghasilkan warna dan rasa gurih manis yang meresap sempurna.",
+    "stock": 25,
+    "price": 24500
+  }
+]
