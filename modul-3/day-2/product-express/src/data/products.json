@@ -40,5 +40,12 @@
     "description": "Hangat di badan",
     "stock": 10,
     "price": 25000
+  },
+  {
+    "id": 7,
+    "title": "Indomie Kuah Rasa Kari Spesial",
+    "description": "lorem ipsum",
+    "stock": 15,
+    "price": 2500
   }
 ]

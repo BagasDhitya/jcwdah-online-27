@@ -7,8 +7,11 @@ import {
   updateProduct,
   deleteProduct,
 } from "../controllers/product.controller.js";
+import { loggerMiddleware } from "../middlewares/logger.middleware.js";
 
 const router = Router();
+
+router.use(loggerMiddleware);
 
 router.get("/hello", getHello);
 router.get("/products", getAllProducts);
