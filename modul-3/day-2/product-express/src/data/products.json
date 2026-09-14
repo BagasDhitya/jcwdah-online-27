@@ -33,5 +33,12 @@
     "description": "Kecap manis legendaris dari kedelai hitam berkualitas Mallika, menghasilkan warna dan rasa gurih manis yang meresap sempurna.",
     "stock": 25,
     "price": 24500
+  },
+  {
+    "id": 6,
+    "title": "Minyak Kayu Putih",
+    "description": "Hangat di badan",
+    "stock": 10,
+    "price": 25000
   }
 ]
