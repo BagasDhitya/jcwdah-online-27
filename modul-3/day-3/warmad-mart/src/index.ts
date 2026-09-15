@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import productRouter from "./routes/product.router.js";
+import { pool } from "./config/db.js";
 // import pool from "./config/db.js"; // Un-comment file koneksi PostgreSQL kamu
 
 const app: Application = express();
@@ -13,8 +14,8 @@ app.use("/api", productRouter);
 // Function untuk memastikan koneksi DB aman sebelum server jalan
 async function startServer() {
   try {
-    // TODO: Cek koneksi ke PostgreSQL (misal: await pool.query("SELECT NOW()"))
-    // console.log("Database connected successfully");
+    const result = await pool.query("SELECT NOW()");
+    console.log("Database connected successfully!");
 
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);

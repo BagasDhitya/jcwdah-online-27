@@ -1,12 +1,33 @@
 import { Product } from "../interfaces/product.interface.js";
-// import db from "../config/db.js"; // Un-comment dan sesuaikan dengan instance DB kamu
+import { query } from "../config/db.js";
 
 export async function getAllProductsService(
   keyword?: string,
   sortedByPrice?: "asc" | "desc",
 ): Promise<Product[]> {
-  // TODO: Tampilkan SELECT * FROM products dengan logic Search (WHERE) & Sort (ORDER BY)
-  return [];
+  const params: any[] = []; // untuk menampung parameter pencarian dinamis ($1, $2)
+
+  let sql = `
+  SELECT * FROM warmad_products.product WHERE deleted_at IS NULL
+`;
+
+  // filter berdasarkan keyword pada judul
+  if (keyword) {
+    params.push(`%${keyword}%`);
+    sql += ` AND title ILIKE $${params.length}`;
+  }
+
+  // pengurutan berdasarkan sorted price
+  if (sortedByPrice) {
+    const order = sortedByPrice.toUpperCase() === "DESC" ? "DESC" : "ASC";
+    sql += ` ORDER BY price ${order}`;
+  } else {
+    // pengurutan default
+    sql += ` ORDER BY id ASC`;
+  }
+
+  const result = await query(sql, params);
+  return result.rows;
 }
 
 export async function getProductByIdService(
