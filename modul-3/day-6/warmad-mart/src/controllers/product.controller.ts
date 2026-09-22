@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as productService from "../services/product.service.js";
+import prisma from "../config/db.js";
 
 export async function createProductHandler(req: Request, res: Response) {
   try {
@@ -91,6 +92,31 @@ export async function deleteProductHandler(req: Request, res: Response) {
 
     await productService.softDeleteProduct(String(id));
     return res.status(200).json({ message: "Produk berhasil dihapus." });
+  } catch (error: any) {
+    return res
+      .status(500)
+      .json({ message: "Terjadi kesalahan server", error: error.message });
+  }
+}
+
+export async function restoreProductHandler(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+
+    // pengecekan barang yang mau direstore
+    // better disimpan di layer SERVICE - ini hanya contoh logic
+    const existingProduct = await prisma.product.findFirst({
+      where: {
+        id: String(id),
+      },
+    });
+
+    if (!existingProduct) {
+      return res.status(404).json({ message: "Produk tidak ditemukan." });
+    }
+
+    await productService.restoreProduct(String(id));
+    return res.status(200).json({ message: "Produk berhasil dikembalikan." });
   } catch (error: any) {
     return res
       .status(500)

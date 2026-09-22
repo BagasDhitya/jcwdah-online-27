@@ -1,4 +1,4 @@
-// import prisma from "../config/db";
+import prisma from "../config/db.js";
 
 /**
  * Interface untuk data input pembuatan produk baru
@@ -22,49 +22,59 @@ export interface UpdateProductInput {
   price?: number;
 }
 
-/**
- * 1. Menambahkan produk baru ke database
- */
 export async function createProduct(data: CreateProductInput) {
-  // TODO: Gunakan prisma.product.create() untuk menyimpan data produk baru
-
-  return null as any; // Temporary return agar controller tidak error
+  return await prisma.product.create({
+    data: {
+      title: data.title,
+      category: data.category,
+      description: data.description,
+      stock: data.stock,
+      price: data.price,
+    },
+  });
 }
 
-/**
- * 2. Mengambil semua produk yang belum dihapus (deletedAt is null)
- */
 export async function getAllProducts() {
-  // TODO: Gunakan prisma.product.findMany()
-  // Filter hanya produk yang `deletedAt` bernilai null, dan urutkan berdasarkan `createdAt` secara descending
-
-  return []; // Temporary return agar controller tidak error
+  return await prisma.product.findMany({
+    where: {
+      deletedAt: null,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 }
 
-/**
- * 3. Mengambil detail satu produk berdasarkan ID
- */
 export async function getProductById(id: string) {
-  // TODO: Gunakan prisma.product.findFirst() atau findUnique()
-  // Cari produk berdasarkan ID dan pastikan `deletedAt` masih null
-
-  return null; // Temporary return agar controller tidak error
+  return await prisma.product.findFirst({
+    where: {
+      id,
+      deletedAt: null,
+    },
+  });
 }
 
-/**
- * 4. Memperbarui data produk berdasarkan ID
- */
 export async function updateProduct(id: string, data: UpdateProductInput) {
-  // TODO: Gunakan prisma.product.update() untuk mengubah data produk berdasarkan id
-
-  return null as any; // Temporary return agar controller tidak error
+  return await prisma.product.update({
+    where: { id },
+    data,
+  });
 }
 
-/**
- * 5. Menerapkan Soft Delete pada produk (mengisi deletedAt dengan tanggal saat ini)
- */
 export async function softDeleteProduct(id: string) {
-  // TODO: Gunakan prisma.product.update() untuk memperbarui field `deletedAt` menjadi new Date()
+  return await prisma.product.update({
+    where: { id },
+    data: {
+      deletedAt: new Date(),
+    },
+  });
+}
 
-  return null as any; // Temporary return agar controller tidak error
+export async function restoreProduct(id: string) {
+  return await prisma.product.update({
+    where: { id },
+    data: {
+      deletedAt: null,
+    },
+  });
 }
