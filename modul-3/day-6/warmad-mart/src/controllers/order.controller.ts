@@ -10,10 +10,14 @@ export async function createOrderHandler(
   next: NextFunction,
 ) {
   try {
-    // TODO: Validasi req.body.items (pastikan ada dan berupa array tidak kosong)
-    // Jika tidak valid, kembalikan status 400
-    // TODO: Panggil orderService.createOrder({ items })
-    // TODO: Kembalikan response JSON status 201 dengan data order baru
+    const { items } = req.body;
+
+    const newOrder = await orderService.createOrder({ items });
+
+    return res.status(201).send({
+      message: "Order berhasil dibuat.",
+      data: newOrder,
+    });
   } catch (error) {
     next(error);
   }

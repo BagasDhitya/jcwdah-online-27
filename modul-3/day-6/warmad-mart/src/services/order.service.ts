@@ -1,8 +1,9 @@
-// import prisma from "../config/db";
+import prisma from "../config/db.js";
 
 export interface OrderItemInput {
   productId: string;
   quantity: number;
+  price?: number;
 }
 
 export interface CreateOrderInput {
@@ -17,13 +18,76 @@ export interface UpdateOrderStatusInput {
  * 1. Membuat Order Baru (Menggunakan Interactive Transaction)
  */
 export async function createOrder(data: CreateOrderInput) {
-  // TODO: Gunakan prisma.$transaction(async (tx) => { ... })
-  // Step 1: Looping items, validasi keberadaan produk & kecukupan stok
-  // Step 2: Potong stok produk menggunakan tx.product.update ({ stock: { decrement: ... } })
-  // Step 3: Hitung totalAmount dan kumpulkan data order items
-  // Step 4: Buat record order beserta relasi items-nya (tx.order.create)
+  // gunakan interactive transaction untuk menjamin atomic
+  return await prisma.$transaction(async (tx) => {
+    let totalAmount: number = 0;
+    const orderItemsToCreate: any[] = [];
 
-  return null as any; // Temporary return agar controller tidak error
+    for (const item of data.items) {
+      // 1. ambil produk dan cek ketersediaan produk
+      const product = await tx.product.findFirst({
+        where: {
+          id: item.productId,
+          deletedAt: null,
+        },
+      });
+
+      if (!product) {
+        throw new Error(`Produk dengan ID ${item.productId} tidak ditemukan.`);
+      }
+
+      if (product.stock < item.quantity) {
+        throw new Error(
+          `Stok produk "${product.title}" tidak mencukupi (Tersisa: ${product.stock})`,
+        );
+      }
+
+      // 2. potong stok produk secara atomik
+      await tx.product.update({
+        where: { id: item.productId },
+        data: {
+          stock: {
+            decrement: item.quantity,
+          },
+        },
+      });
+
+      // 3. hitung harga item & total amount
+      const itemPrice = Number(product.price);
+      totalAmount += itemPrice * item.quantity;
+
+      orderItemsToCreate.push({
+        productId: item.productId,
+        quantity: item.quantity,
+        price: Number(product.price),
+      });
+
+      // 4. buat record order beserta OrderItems
+      const order = await tx.order.create({
+        data: {
+          totalAmount,
+          status: "PENDING",
+          items: {
+            create: orderItemsToCreate,
+          },
+        },
+        include: {
+          items: {
+            include: {
+              product: {
+                select: {
+                  id: true,
+                  title: true,
+                  price: true,
+                },
+              },
+            },
+          },
+        },
+      });
+      return order;
+    }
+  });
 }
 
 /**
