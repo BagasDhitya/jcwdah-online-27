@@ -1,16 +1,22 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import * as productService from "../services/product.service.js";
 import prisma from "../config/db.js";
 
-export async function createProductHandler(req: Request, res: Response) {
+// catatan: validasi dimatikan untuk uji error handler
+
+export async function createProductHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const { title, category, description, stock, price } = req.body;
 
-    if (!title || !category || stock === undefined || price === undefined) {
-      return res
-        .status(400)
-        .json({ message: "Title, category, stock, dan price wajib diisi." });
-    }
+    // if (!title || !category || stock === undefined || price === undefined) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: "Title, category, stock, dan price wajib diisi." });
+    // }
 
     const product = await productService.createProduct({
       title,
@@ -24,24 +30,28 @@ export async function createProductHandler(req: Request, res: Response) {
       .status(201)
       .json({ message: "Produk berhasil dibuat", data: product });
   } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: "Terjadi kesalahan server", error: error.message });
+    next(error);
   }
 }
 
-export async function getAllProductsHandler(_req: Request, res: Response) {
+export async function getAllProductsHandler(
+  _req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const products = await productService.getAllProducts();
     return res.status(200).json({ data: products });
   } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: "Terjadi kesalahan server", error: error.message });
+    next(error);
   }
 }
 
-export async function getProductByIdHandler(req: Request, res: Response) {
+export async function getProductByIdHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const { id } = req.params;
     const product = await productService.getProductById(String(id));
@@ -52,13 +62,15 @@ export async function getProductByIdHandler(req: Request, res: Response) {
 
     return res.status(200).json({ data: product });
   } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: "Terjadi kesalahan server", error: error.message });
+    next(error);
   }
 }
 
-export async function updateProductHandler(req: Request, res: Response) {
+export async function updateProductHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const { id } = req.params;
     const existingProduct = await productService.getProductById(String(id));
@@ -75,31 +87,35 @@ export async function updateProductHandler(req: Request, res: Response) {
       .status(200)
       .json({ message: "Produk berhasil diperbarui", data: updatedProduct });
   } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: "Terjadi kesalahan server", error: error.message });
+    next(error);
   }
 }
 
-export async function deleteProductHandler(req: Request, res: Response) {
+export async function deleteProductHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const { id } = req.params;
     const existingProduct = await productService.getProductById(String(id));
 
-    if (!existingProduct) {
-      return res.status(404).json({ message: "Produk tidak ditemukan." });
-    }
+    // if (!existingProduct) {
+    //   return res.status(404).json({ message: "Produk tidak ditemukan." });
+    // }
 
     await productService.softDeleteProduct(String(id));
     return res.status(200).json({ message: "Produk berhasil dihapus." });
   } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: "Terjadi kesalahan server", error: error.message });
+    next(error);
   }
 }
 
-export async function restoreProductHandler(req: Request, res: Response) {
+export async function restoreProductHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const { id } = req.params;
 
@@ -118,8 +134,6 @@ export async function restoreProductHandler(req: Request, res: Response) {
     await productService.restoreProduct(String(id));
     return res.status(200).json({ message: "Produk berhasil dikembalikan." });
   } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: "Terjadi kesalahan server", error: error.message });
+    next(error);
   }
 }

@@ -2,6 +2,7 @@ import express from "express";
 import prisma from "./config/db.js";
 
 import productRouter from "./routes/product.router.js";
+import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 const PORT = 8000;
@@ -9,6 +10,9 @@ const PORT = 8000;
 app.use(express.json());
 
 app.use("/api/products", productRouter);
+
+// error middleware HARUS diletakkan di akhir semua router
+app.use(errorHandler);
 
 /**
  * Fungsi untuk menguji koneksi ke database sebelum server berjalan

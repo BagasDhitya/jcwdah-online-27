@@ -21,7 +21,7 @@ enum OrderStatus {
 
 model Product {
   id          String  @id @default(uuid())
-  title       String
+  title       String  @unique
   category    String
   description String? @db.Text
   stock       Int     @default(0)
