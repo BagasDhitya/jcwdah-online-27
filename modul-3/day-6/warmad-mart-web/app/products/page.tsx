@@ -1,4 +1,5 @@
 import { api } from "@/config/axios";
+import { Product } from "@/interfaces/product";
 
 // bikin fungsi untuk mengambil data dari sisi Server
 async function getProducts() {
@@ -37,7 +38,7 @@ export default async function Products() {
               Belum ada produk yang tersedia
             </div>
           ) : (
-            products?.data?.map((product: any) => (
+            products?.data?.map((product: Product) => (
               <div
                 key={product.id}
                 className="p-5 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-100 flex flex-col"
@@ -58,7 +59,7 @@ export default async function Products() {
                       Stock: {product.stock}
                     </span>
                     <span className="text-lg text-gray-900">
-                      Stock: {product.stock}
+                      Price: {product.price}
                     </span>
                   </div>
                 </div>
