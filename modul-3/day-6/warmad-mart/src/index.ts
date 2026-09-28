@@ -1,5 +1,6 @@
 import express from "express";
 import prisma from "./config/db.js";
+import cors from "cors";
 
 import productRouter from "./routes/product.router.js";
 import orderRouter from "./routes/order.router.js";
@@ -8,6 +9,16 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 const PORT = 8000;
+
+// CORS -> Cross Origin Resource Sharing
+// tugasnya untuk membatasi akses ke API (whitelist untuk beberapa address tertentu aja)
+// bisa multiple address
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:5173"],
+  }),
+);
 
 app.use(express.json());
 
