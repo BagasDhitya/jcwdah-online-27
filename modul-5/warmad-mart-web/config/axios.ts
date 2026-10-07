@@ -1,10 +1,13 @@
 import axios from "axios";
 
-// mengambil Base Url dari file .env
-const API_BASE_URL = process.env.NEXT_PUBLIC_WARMAD_DEV_URL;
+// Memilih URL berdasarkan environment aktif
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_WARMAD_PROD_URL
+    : process.env.NEXT_PUBLIC_WARMAD_DEV_URL;
 
 export const api = axios.create({
-  baseURL: API_BASE_URL, // http://localhost:8000
+  baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
