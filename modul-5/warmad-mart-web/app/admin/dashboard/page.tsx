@@ -49,7 +49,7 @@ export default function AdminDashboard() {
 
   async function handleDelete(id: string) {
     if (!confirm("Hapus produk ini?")) return;
-    const result = await softDelete(id);
+    await softDelete(id);
   }
 
   return (
@@ -85,9 +85,9 @@ export default function AdminDashboard() {
           <>
             <h2 className="mb-4 text-xl font-bold">Daftar Produk</h2>
 
-            {loading && products?.data?.length === 0 ? (
+            {loading && products?.length === 0 ? (
               <p>Memuat produk...</p>
-            ) : products?.data?.length === 0 ? (
+            ) : products?.length === 0 ? (
               <p>Belum ada produk.</p>
             ) : (
               <table className="w-full border text-left text-sm">
@@ -102,7 +102,7 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {products?.data?.map((p) => (
+                  {products?.map((p: Product) => (
                     <tr key={p.id}>
                       <td className="border p-2">{p.title}</td>
                       <td className="border p-2">{p.category}</td>
