@@ -4,6 +4,7 @@ import cors from "cors";
 
 import productRouter from "./routes/product.router.js";
 import orderRouter from "./routes/order.router.js";
+import aiRouter from "./routes/ai.router.js";
 
 import { errorHandler } from "./middlewares/error.middleware.js";
 
@@ -24,6 +25,7 @@ app.use(express.json());
 
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/ai", aiRouter);
 
 // error middleware HARUS diletakkan di akhir semua router
 app.use(errorHandler);
