@@ -33,12 +33,12 @@ export default async function Products() {
 
         {/* Tampilan Grid untuk Card Product */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products?.data?.length === 0 ? (
+          {products?.length === 0 ? (
             <div className="col-span-full text-center py-10 text-gray-500 bg-white rounded-lg shadow">
               Belum ada produk yang tersedia
             </div>
           ) : (
-            products?.data?.map((product: Product) => (
+            products?.map((product: Product) => (
               <div
                 key={product.id}
                 className="p-5 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-100 flex flex-col"
