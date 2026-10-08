@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     "sembako murah",
     "belanja online",
     "minimarket online",
+    "toko kelontong online terdekat",
   ],
   openGraph: {
     title: "Warmad Mart | Solusi Kebutuhan Rumah Tangga Anda",
@@ -45,6 +46,13 @@ export const metadata: Metadata = {
         alt: "Warmad Mart - Solusi Kebutuhan Rumah Tangga Anda",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Warmad Mart | Solusi Kebutuhan Rumah Tangga Anda",
+    description:
+      "Belanja kebutuhan rumah tangga, sembako, dan produk harian lengkap, murah, dan cepat di Warmad Mart.",
+    images: ["/comp_logo.jpg"],
   },
 };
 
