@@ -4,6 +4,30 @@ import { Product } from "@/interfaces/product";
 
 export const metadata: Metadata = {
   title: "Katalog Produk Lengkap",
+  description: "Jelajahi katalog produk lengkap Warmad Mart. Dapatkan Promo",
+  keywords: [
+    "katalog produk warmad mart",
+    "belanja sembako online",
+    "kebutuhan rumah tangga",
+    "harga sembako murah",
+    "diskon produk harian",
+  ],
+  openGraph: {
+    title: "Katalog Produk Lengkap | Warmad Mart",
+    description: "Jelajahi katalog produk lengkap Warmad Mart. Dapatkan Promo.",
+    url: "/products",
+    siteName: "Warmad Mart",
+    locale: "id-ID",
+    type: "website",
+    images: [
+      {
+        url: "/comp_logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Katalog Produk Warmad Mart",
+      },
+    ],
+  },
 };
 
 // bikin fungsi untuk mengambil data dari sisi Server
