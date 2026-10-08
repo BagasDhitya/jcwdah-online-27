@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -54,6 +55,11 @@ export const metadata: Metadata = {
       "Belanja kebutuhan rumah tangga, sembako, dan produk harian lengkap, murah, dan cepat di Warmad Mart.",
     images: ["/comp_logo.jpg"],
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Warmad Mart",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -63,6 +69,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
+
+      {/* Inject script registrasi service worker native */}
+      <Script id="register-sw" strategy="afterInteractive">
+        {`
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+              navigator.serviceWorker.register('/sw.js').then(
+                function(registration) {
+                  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                },
+                function(err) {
+                  console.log('ServiceWorker registration failed: ', err);
+                }
+              );
+            });
+          }
+        `}
+      </Script>
     </html>
   );
 }
