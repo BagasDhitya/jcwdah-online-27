@@ -68,11 +68,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
-
-      {/* Inject script registrasi service worker native */}
-      <Script id="register-sw" strategy="afterInteractive">
-        {`
+      <body className="min-h-full flex flex-col">
+        {/* Inject script registrasi service worker native */}
+        <Script id="register-sw" strategy="afterInteractive">
+          {`
           if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
               navigator.serviceWorker.register('/sw.js').then(
@@ -86,7 +85,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             });
           }
         `}
-      </Script>
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,5 +1,8 @@
-const CACHE_NAME = "warmad-mart-v1"
-const ASSETS_TO_CACHE = ["/", "/products"]
+const CACHE_NAME = "warmad-mart-v2"; // naikkan versi supaya cache lama dibersihkan
+const ASSETS_TO_CACHE = ["/", "/products", "/offline.html"];
+
+// Hanya tangani GET dan same-origin
+  if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
 
 // install service worker & cache
 self.addEventListener("install", (event) => {
