@@ -1,5 +1,10 @@
+import { Metadata } from "next";
 import { api } from "@/config/axios";
 import { Product } from "@/interfaces/product";
+
+export const metadata: Metadata = {
+  title: "Katalog Produk Lengkap",
+};
 
 // bikin fungsi untuk mengambil data dari sisi Server
 async function getProducts() {
