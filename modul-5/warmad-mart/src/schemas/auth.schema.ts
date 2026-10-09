@@ -3,10 +3,7 @@ import { z as zod } from "zod";
 // Skema untuk aturan registrasi customer
 export const registerSchema = zod.object({
   body: zod.object({
-    email: zod
-      .string()
-      .min(1, "Email wajib diisi")
-      .email("Format email tidak valid"),
+    email: zod.email("Format email tidak valid").min(1, "Email wajib diisi"),
     password: zod.string().min(6, "Password minimal 6 karakter"),
   }),
 });
@@ -14,10 +11,7 @@ export const registerSchema = zod.object({
 // Skema untuk aturan login
 export const loginSchema = zod.object({
   body: zod.object({
-    email: zod
-      .string()
-      .min(1, "Email wajib diisi")
-      .email("Format email tidak valid"),
+    email: zod.email("Format email tidak valid").min(1, "Email wajib diisi"),
     password: zod.string().min(1, "Password wajib diisi"),
   }),
 });
