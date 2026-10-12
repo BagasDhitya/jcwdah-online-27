@@ -19,6 +19,25 @@ enum OrderStatus {
   COMPLETED
 }
 
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  role     Role   @default(CUSTOMER)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  orders    Order[]
+
+  @@map("users")
+}
+
 model Product {
   id          String  @id @default(uuid())
   title       String  @unique
@@ -42,6 +61,9 @@ model Order {
   status      OrderStatus @default(PENDING)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 
   items OrderItem[]
 

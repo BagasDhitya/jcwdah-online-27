@@ -17,15 +17,13 @@ export const validate =
 
       // menimpa nilai req dengan data yang sudah tervalidasi dan dibersihkan oleh Zod
       req.body = parsed.body ?? req.body;
-      req.params = parsed.params ?? req.params;
-      req.query = parsed.query ?? req.query;
 
       // lanjut ke controller/middleware berikutnya
       return next();
     } catch (error) {
       // jika error terjadi akibat gagal validasi zod
       if (error instanceof ZodError) {
-        return res.status(500).send({
+        return res.status(400).send({
           status: "failed",
           message: "Validasi data gagal",
           // mengubah format error zod menjadi array object yang rapi

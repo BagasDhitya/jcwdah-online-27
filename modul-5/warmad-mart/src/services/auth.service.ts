@@ -1,37 +1,87 @@
-// import bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import prisma from "../config/db.js";
-
-export interface RegisterInput {
-  email: string;
-  password: string;
-}
-
-export interface LoginInput {
-  email: string;
-  password: string;
-}
+import { RegisterInput, LoginInput } from "../interfaces/auth.interface.js";
+import { Role } from "../generated/prisma/index.js";
 
 /**
  * Service: Registrasi Customer
  */
 export async function registerCustomer(data: RegisterInput) {
-  // TODO 2: Cek apakah email sudah terdaftar di database
-  // Hint: Gunakan prisma.user.findUnique()
-  // TODO 3: Hash password user menggunakan bcrypt
-  // Hint: Gunakan bcrypt.hash(password, saltRounds)
-  // TODO 4: Simpan user baru ke DB dengan role 'CUSTOMER' & return data tanpa password
-  // Hint: Gunakan prisma.user.create() dengan properti 'select'
+  // cek apakah email sudah terdaftar atau belum
+  const existingUser = await prisma.user.findUnique({
+    where: { email: data.email },
+  });
+
+  if (existingUser) {
+    const error: any = new Error("Email sudah terdaftar");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  // kalau lolos pengecekan, lanjut ke hash password menggunakan bcrypt
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+
+  // simpan ke database dengan role CUSTOMER
+  const newUser = await prisma.user.create({
+    data: {
+      email: data.email,
+      password: hashedPassword,
+      role: Role.CUSTOMER, // dipaksa selalu CUSTOMER
+    },
+    select: {
+      id: true,
+      email: true,
+      role: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  return newUser;
 }
 
 /**
  * Service: Login User
  */
 export async function loginUser(data: LoginInput) {
-  // TODO 5: Cari user berdasarkan email
-  // Hint: Jika user tidak ditemukan, throw error 401 (Email atau password salah)
-  // TODO 6: Verifikasi password menggunakan bcrypt.compare()
-  // Hint: Jika invalid, throw error 401
-  // TODO 7: Generate JWT Access Token dan return data user (tanpa password)
-  // Hint: Gunakan jwt.sign(payload, secretKey, { expiresIn: '1d' })
+  // cek apakah email sudah terdaftar atau belum
+  const user = await prisma.user.findUnique({
+    where: { email: data.email },
+  });
+
+  if (!user) {
+    const error: any = new Error("Email atau password salah");
+    error.statusCode = 401;
+    throw error;
+  }
+
+  // verifikasi password dengan hash di DB
+  const isPasswordValid = await bcrypt.compare(data.password, user.password);
+  if (!isPasswordValid) {
+    const error: any = new Error("Password tidak sesuai");
+    error.statusCode = 401;
+    throw error;
+  }
+
+  // buat jwt access token (standarnya, kita kasih expired 1 hari)
+  const secretKey = process.env.JWT_SECRET;
+  const token = jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    },
+    secretKey,
+    { expiresIn: "1d" },
+  );
+
+  return {
+    token,
+    user: {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    },
+  };
 }

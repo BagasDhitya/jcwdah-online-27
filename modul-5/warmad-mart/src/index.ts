@@ -24,10 +24,10 @@ app.use(
 
 app.use(express.json());
 
+app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/ai", aiRouter);
-app.use("/api/auth", authRouter);
 
 // error middleware HARUS diletakkan di akhir semua router
 app.use(errorHandler);

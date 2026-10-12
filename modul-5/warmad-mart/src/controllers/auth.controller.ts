@@ -10,11 +10,15 @@ export async function registerHandler(
   next: NextFunction,
 ) {
   try {
-    // TODO 1: Extract email & password dari req.body
-    // TODO 2: Validasi input sederhana (pastikan email & password ada)
-    // Hint: Return res.status(400) jika ada yang kosong
-    // TODO 3: Panggil authService.registerCustomer()
-    // TODO 4: Kirim response sukses (201 Created) beserta data user
+    // data req.body sudah pasti tervalidasi di level router
+    const { email, password } = req.body;
+
+    const user = await authService.registerCustomer({ email, password });
+
+    return res.status(201).send({
+      message: "Registrasi akun customer berhasil.",
+      data: user,
+    });
   } catch (error: any) {
     // TODO 5: Teruskan error ke Global Error Middleware
     next(error);
@@ -30,12 +34,15 @@ export async function loginHandler(
   next: NextFunction,
 ) {
   try {
-    // TODO 6: Extract email & password dari req.body
-    // TODO 7: Validasi input sederhana
-    // TODO 8: Panggil authService.loginUser()
-    // TODO 9: Kirim response sukses (200 OK) beserta token & data user
+    const { email, password } = req.body;
+
+    const user = await authService.loginUser({ email, password });
+
+    return res.status(200).send({
+      message: "Login berhasil",
+      data: user,
+    });
   } catch (error: any) {
-    // TODO 10: Teruskan error ke Global Error Middleware
     next(error);
   }
 }
