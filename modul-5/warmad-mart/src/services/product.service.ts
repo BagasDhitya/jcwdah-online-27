@@ -7,6 +7,7 @@ export interface CreateProductInput {
   title: string;
   category: string;
   description?: string;
+  imageUrl?: string;
   stock: number;
   price: number;
 }
@@ -18,6 +19,7 @@ export interface UpdateProductInput {
   title?: string;
   category?: string;
   description?: string;
+  imageUrl?: string;
   stock?: number;
   price?: number;
 }
@@ -28,6 +30,7 @@ export async function createProduct(data: CreateProductInput) {
       title: data.title,
       category: data.category,
       description: data.description,
+      imageUrl: data.imageUrl,
       stock: data.stock,
       price: data.price,
     },

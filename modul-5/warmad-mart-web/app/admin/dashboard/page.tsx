@@ -16,6 +16,9 @@ export default function AdminDashboard() {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
 
+  // State baru untuk menampung file gambar yang dipilih
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
   function openForm(product: Product | null = null) {
     setEditing(product);
     setTitle(product?.title ?? "");
@@ -23,6 +26,7 @@ export default function AdminDashboard() {
     setDescription(product?.description ?? "");
     setPrice(String(product?.price ?? ""));
     setStock(String(product?.stock ?? ""));
+    setImageFile(null); // Reset file saat buka form
     setView("form");
   }
 
@@ -37,9 +41,10 @@ export default function AdminDashboard() {
       stock: Number(stock),
     };
 
+    // Kirim imageFile bersamaan ke fungsi hooks
     const result = editing
-      ? await updateProduct(payload, editing.id)
-      : await createProduct(payload);
+      ? await updateProduct(payload, editing.id, imageFile || undefined)
+      : await createProduct(payload, imageFile || undefined);
 
     if (result) {
       setEditing(null);
@@ -93,6 +98,7 @@ export default function AdminDashboard() {
               <table className="w-full border text-left text-sm">
                 <thead className="bg-gray-100">
                   <tr>
+                    <th className="border p-2">Gambar</th>
                     <th className="border p-2">Judul</th>
                     <th className="border p-2">Kategori</th>
                     <th className="border p-2">Deskripsi</th>
@@ -104,6 +110,20 @@ export default function AdminDashboard() {
                 <tbody>
                   {products?.map((p: Product) => (
                     <tr key={p.id}>
+                      {/* Kolom untuk menampilkan preview gambar */}
+                      <td className="border p-2">
+                        {p.imageUrl ? (
+                          <img
+                            src={p.imageUrl}
+                            alt={p.title}
+                            className="h-12 w-12 object-cover rounded"
+                          />
+                        ) : (
+                          <span className="text-gray-400 text-xs">
+                            Tidak ada
+                          </span>
+                        )}
+                      </td>
                       <td className="border p-2">{p.title}</td>
                       <td className="border p-2">{p.category}</td>
                       <td className="max-w-xs truncate border p-2">
@@ -183,6 +203,23 @@ export default function AdminDashboard() {
                 onChange={(e) => setStock(e.target.value)}
                 required
               />
+
+              {/* Input file baru untuk upload gambar */}
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium text-gray-700">
+                  Upload Gambar Produk
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="rounded border p-2 text-sm"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      setImageFile(e.target.files[0]);
+                    }
+                  }}
+                />
+              </div>
 
               <div className="flex gap-2">
                 <button

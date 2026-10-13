@@ -16,6 +16,8 @@ import {
 } from "../middlewares/auth.middleware.js";
 import { Role } from "../generated/prisma/index.js";
 
+import { uploadSingleImage } from "../middlewares/upload.middleware.js";
+
 const productRouter = Router();
 
 // public routes (bisa diakses siapa aja)
@@ -27,6 +29,7 @@ productRouter.post(
   "/",
   authenticate,
   authorizeRoles(Role.ADMIN),
+  uploadSingleImage, // middleware multer ditempatkan sebelum validasi/handler
   validate(createProductSchema),
   createProductHandler,
 );

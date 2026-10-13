@@ -2,30 +2,58 @@ import { Request, Response, NextFunction } from "express";
 import * as productService from "../services/product.service.js";
 import prisma from "../config/db.js";
 
+import { uploadToCloudinary } from "../services/cloudinary.service.js";
+import { sendNewProductNotification } from "../services/email.service.js";
+
+import { MulterRequest } from "../middlewares/upload.middleware.js";
+
 // catatan: validasi dimatikan untuk uji error handler
 
 export async function createProductHandler(
-  req: Request,
+  req: MulterRequest,
   res: Response,
   next: NextFunction,
 ) {
   try {
     const { title, category, description, stock, price } = req.body;
 
-    // if (!title || !category || stock === undefined || price === undefined) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Title, category, stock, dan price wajib diisi." });
-    // }
+    let imageUrl: string | undefined;
 
+    // jika ada file yang diunggah lewat Multer
+    if (req.file) {
+      const uploadResult = await uploadToCloudinary(
+        req.file.buffer,
+        "warmad-products",
+      );
+      imageUrl = uploadResult.secure_url;
+    }
+
+    // setelah dapat gambar produk, baru dicatat ke database
     const product = await productService.createProduct({
       title,
       category,
       description,
-      stock: Number(stock),
-      price: Number(price),
+      imageUrl: imageUrl,
+      stock: stock,
+      price: price,
     });
 
+    // kirim notifikasi email ke admin secara asynchronous
+    const adminEmail = process.env.EMAIL_USER;
+    if (adminEmail) {
+      sendNewProductNotification({
+        to: adminEmail,
+        productTitle: product.title,
+        category: product.category,
+        price: Number(product.price),
+        stock: product.stock,
+        imageUrl: product.imageUrl || undefined,
+      }).catch((error) => {
+        console.error("Gagal mengirim email notifikasi: ", error.message);
+      });
+    }
+
+    // setelah sukses, lempar response
     return res
       .status(201)
       .json({ message: "Produk berhasil dibuat", data: product });

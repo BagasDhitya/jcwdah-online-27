@@ -6,11 +6,15 @@ export const createProductSchema = zod.object({
     title: zod.string().min(1, "Title tidak boleh kosong"),
     category: zod.string().min(1, "Category tidak boleh kosong"),
     description: zod.string().optional(), // boleh diisi atau tidak
-    stock: zod
-      .number()
+
+    // gunakan zod.coerce.number() agar string dari form-data dikonversi ke number
+    stock: zod.coerce
+      .number({ message: "Stock harus berupa angka" })
       .int("Stock harus berupa angka bulat")
-      .nonnegative("Stock tidak boleh negatif"),
-    price: zod.number().positive("Price harus lebih besar dari 0"),
+      .nonnegative("Stock tidak boleh minus"),
+    price: zod.coerce
+      .number({ message: "Price harus berupa angka" })
+      .positive("Price harus lebih besar dari 0"),
   }),
 });
 
