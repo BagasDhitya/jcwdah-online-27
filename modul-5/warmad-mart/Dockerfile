@@ -16,6 +16,9 @@ COPY . .
 # generate prisma client agar koneksi ke db siap digunakan
 RUN npx prisma generate
 
+# Menyiapkan folder uploads agar bisa dipasangkan volume
+RUN mkdir -p /app/uploads
+
 # membuka port server backend
 EXPOSE 8000
 

@@ -15,6 +15,9 @@ services:
     # Membaca environment variables langsung dari .env milik backend
     env_file:
       - ./warmad-mart/.env
+    volumes:
+      - ./warmad-mart/src:/app/src # (Opsional untuk development)
+      - mart_storage:/app/uploads # Volume khusus agar file upload tidak hilang
     networks:
       - warmad-network
 
@@ -44,3 +47,7 @@ services:
 networks:
   warmad-network:
     driver: bridge
+
+# Mendefinisikan volume di tingkat global compose
+volumes:
+  mart_storage:
