@@ -1,0 +1,46 @@
+# Catatan: Penulisan 'version:' di paling atas sudah DEPRECATED/OBSOLETE pada Docker Compose Specification terbaru.
+# Cukup mulai langsung dengan 'services:'.
+
+services:
+  # -----------------------------------------------------------
+  # 1. SERVICE BACKEND (Node.js + Express + Prisma)
+  # -----------------------------------------------------------
+  backend:
+    build:
+      context: ./warmad-mart # Lokasi folder backend
+      dockerfile: Dockerfile # Menggunakan Dockerfile di folder backend
+    container_name: warmad-mart-be
+    ports:
+      - "8000:8000" # Format -> "Port_Host:Port_Container"
+    # Membaca environment variables langsung dari .env milik backend
+    env_file:
+      - ./warmad-mart/.env
+    networks:
+      - warmad-network
+
+  # -----------------------------------------------------------
+  # 2. SERVICE FRONTEND (Next.js)
+  # -----------------------------------------------------------
+  frontend:
+    build:
+      context: ./warmad-mart-web # Lokasi folder frontend
+      dockerfile: Dockerfile # Menggunakan Dockerfile di folder frontend
+    container_name: warmad-mart-fe
+    ports:
+      - "3000:3000" # Format -> "Port_Host:Port_Container"
+    # Membaca environment variables langsung dari .env milik frontend
+    env_file:
+      - ./warmad-mart-web/.env
+    # Memastikan backend menyala terlebih dahulu sebelum frontend
+    depends_on:
+      - backend
+    networks:
+      - warmad-network
+
+# -----------------------------------------------------------
+# JARINGAN LOKAL (Docker Network)
+# Menghubungkan FE dan BE agar dapat saling berkomunikasi
+# -----------------------------------------------------------
+networks:
+  warmad-network:
+    driver: bridge
