@@ -69,7 +69,11 @@ export async function getAllProductsHandler(
 ) {
   try {
     const products = await productService.getAllProducts();
-    return res.status(200).json({ data: products });
+    return res.status(200).json({
+      source: products.source,
+      responseTime: products.responseTime,
+      data: products.data,
+    });
   } catch (error: any) {
     next(error);
   }

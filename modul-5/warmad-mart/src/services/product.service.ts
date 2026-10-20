@@ -1,4 +1,5 @@
 import prisma from "../config/db.js";
+import { redis } from "../config/redis.js";
 
 /**
  * Interface untuk data input pembuatan produk baru
@@ -25,7 +26,7 @@ export interface UpdateProductInput {
 }
 
 export async function createProduct(data: CreateProductInput) {
-  return await prisma.product.create({
+  const product = await prisma.product.create({
     data: {
       title: data.title,
       category: data.category,
@@ -35,10 +36,36 @@ export async function createProduct(data: CreateProductInput) {
       price: data.price,
     },
   });
+
+  // hapus/invalisasi cache: setiap ada produk baru, cache getAllProducts wajib dihapus
+  // notes: harus dilakukan juga di fitur Update
+  // supaya data terbaru langsung muncul saat user melakukan get all berikutnya
+  await redis.del("products:all");
+  return product;
 }
 
 export async function getAllProducts() {
-  return await prisma.product.findMany({
+  const startTime = performance.now(); // mulai hitung waktu
+  const cacheKey = "products:all";
+
+  // cek apakah data sudah ada di Redis Cache
+  const cachedData = await redis.get(cacheKey);
+
+  if (cachedData) {
+    // untuk mendefinisikan berapa lama/cepat redis ini bekerja
+    const endTime = performance.now();
+    const responseTime = `${(endTime - startTime).toFixed(2)} ms`;
+
+    // kembalikan data dari cache beserta metadata bukti
+    return {
+      source: "cache (Redis)",
+      responseTime,
+      data: cachedData,
+    };
+  }
+
+  // jika tidak ada di cache (Cache Miss), ambil dari Database
+  const products = await prisma.product.findMany({
     where: {
       deletedAt: null,
     },
@@ -46,6 +73,18 @@ export async function getAllProducts() {
       createdAt: "desc",
     },
   });
+
+  // simpan data ke redis cache dengan masa aktif (TTL) misal 60 detik
+  await redis.set(cacheKey, products, { ex: 60 });
+
+  const endTime = performance.now();
+  const responseTime = `${(endTime - startTime).toFixed(2)} ms`;
+
+  return {
+    source: "database",
+    responseTime,
+    data: products,
+  };
 }
 
 export async function getProductById(id: string) {

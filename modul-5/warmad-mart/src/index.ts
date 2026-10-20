@@ -8,6 +8,7 @@ import aiRouter from "./routes/ai.router.js";
 import authRouter from "./routes/auth.router.js";
 
 import { errorHandler } from "./middlewares/error.middleware.js";
+import { loggerMiddleware } from "./middlewares/logger.middleware.js";
 
 const app = express();
 const PORT = 8000;
@@ -23,6 +24,9 @@ app.use(
 );
 
 app.use(express.json());
+
+// logger haruus dipasang paling atas untuk merecord semua aktivitas di app
+app.use(loggerMiddleware);
 
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);

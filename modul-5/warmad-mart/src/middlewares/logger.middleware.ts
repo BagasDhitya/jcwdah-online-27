@@ -1,19 +1,28 @@
 import { Request, Response, NextFunction } from "express";
+import { logger } from "../utils/logger.js";
 
 export function loggerMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const startTime = process.hrtime();
-  const requestDate = new Date().toISOString();
+  const start = process.hrtime(); // Mulai hitung waktu
 
   res.on("finish", () => {
-    const diff = process.hrtime(startTime);
-    const latencyInMs = (diff[0] * 1e3 + diff[1] * 1e-6).toFixed(2);
+    const diff = process.hrtime(start);
+    const timeInMs = (diff[0] * 1e3 + diff[1] * 1e-6).toFixed(); // format konversi ke milidetik
+    const currentDate = new Date()
+      .toISOString()
+      .replace("T", " ")
+      .substring(0, 19);
 
-    console.log(
-      `[${requestDate}] ${req.method} ${req.originalUrl} - ${res.statusCode} (${latencyInMs} ms)`,
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const statusCode = res.statusCode;
+
+    // catat ke winston log
+    logger.info(
+      `Tanggal: ${currentDate} | Method: ${method} | Endpoint: ${endpoint} | Status: ${statusCode} | Waktu: ${timeInMs} ms`,
     );
   });
 

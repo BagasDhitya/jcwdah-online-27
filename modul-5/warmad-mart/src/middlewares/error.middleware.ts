@@ -7,7 +7,6 @@ export function errorHandler(
   res: Response,
   next: NextFunction,
 ) {
-  console.error("🔥 ERROR TERDETEKSI DI GLOBAL HANDLER:", err); // <-- Tambahkan ini
   // tangani error spesifik dari Prisma
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     switch (err.code) {
