@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import prisma from "./config/db.js";
 import cors from "cors";
 
@@ -28,6 +28,12 @@ app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/ai", aiRouter);
+
+app.use("/api/test", (req: Request, res: Response) => {
+  res.status(200).send({
+    message: "ok",
+  });
+});
 
 // error middleware HARUS diletakkan di akhir semua router
 app.use(errorHandler);
