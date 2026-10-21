@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import prisma from "./config/db.js";
 import cors from "cors";
+import http from "http";
 
 import productRouter from "./routes/product.router.js";
 import orderRouter from "./routes/order.router.js";
@@ -11,6 +12,8 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 import { loggerMiddleware } from "./middlewares/logger.middleware.js";
 import { initStockChecker } from "./utils/cron/stockChecker.js";
 import { handleStockNotification } from "./utils/workers/stockWorker.js";
+
+import { initSocket } from "./config/socket.js";
 
 const app = express();
 const PORT = 8000;
@@ -26,6 +29,12 @@ app.use(
 );
 
 app.use(express.json());
+
+// buat http server untuk konfigurasi socket
+const server = http.createServer(app);
+
+// inisialisasi socket.IO di atas HTTP Server
+initSocket(server);
 
 // logger haruus dipasang paling atas untuk merecord semua aktivitas di app
 app.use(loggerMiddleware);
@@ -67,7 +76,9 @@ async function testDbConnection() {
 async function startServer() {
   await testDbConnection();
 
-  app.listen(PORT, () => {
+  // jika ingin tes socketio harus pake server
+  // jika sudah selesai, kemablikan ke app.listen
+  server.listen(PORT, () => {
     console.log(`Server berjalan di http://localhost:${PORT}`);
   });
 }
