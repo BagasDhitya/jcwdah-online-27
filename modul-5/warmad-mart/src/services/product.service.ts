@@ -1,5 +1,6 @@
 import prisma from "../config/db.js";
 import { redis } from "../config/redis.js";
+import { enqueueLowStockNotification } from "../utils/queues/stockQueue.js";
 
 /**
  * Interface untuk data input pembuatan produk baru
@@ -36,6 +37,10 @@ export async function createProduct(data: CreateProductInput) {
       price: data.price,
     },
   });
+
+  if (product.stock <= 5) {
+    await enqueueLowStockNotification(product.title, product.stock);
+  }
 
   // hapus/invalisasi cache: setiap ada produk baru, cache getAllProducts wajib dihapus
   // notes: harus dilakukan juga di fitur Update

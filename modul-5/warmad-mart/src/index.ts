@@ -9,6 +9,8 @@ import authRouter from "./routes/auth.router.js";
 
 import { errorHandler } from "./middlewares/error.middleware.js";
 import { loggerMiddleware } from "./middlewares/logger.middleware.js";
+import { initStockChecker } from "./utils/cron/stockChecker.js";
+import { handleStockNotification } from "./utils/workers/stockWorker.js";
 
 const app = express();
 const PORT = 8000;
@@ -38,6 +40,10 @@ app.use("/api/test", (req: Request, res: Response) => {
     message: "ok",
   });
 });
+
+app.use("/api/queues/stock-notification", handleStockNotification);
+
+// initStockChecker();
 
 // error middleware HARUS diletakkan di akhir semua router
 app.use(errorHandler);

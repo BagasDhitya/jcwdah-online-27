@@ -54,3 +54,29 @@ export async function sendNewProductNotification({
   console.log("rejected:", info.rejected);
   console.log("response:", info.response);
 }
+
+export async function lowStockNotification(
+  products: any[],
+  adminEmail: string,
+) {
+  // path ke file template hbs
+  const filePath = path.resolve("src/templates/email/low-stock.hbs");
+  const templateSource = fs.readFileSync(filePath, "utf-8");
+
+  // compile template dengan Handlebars
+  const compiledTemplate = handlebars.compile(templateSource);
+  const htmlToSend = compiledTemplate({
+    products,
+  });
+
+  const info = await transporter.sendMail({
+    from: `"Store System" - <${process.env.EMAIL_USER}>`,
+    to: adminEmail,
+    subject: `[Admin Alert] - Stock Menipis!`,
+    html: htmlToSend,
+  });
+
+  console.log("accepted:", info.accepted);
+  console.log("rejected:", info.rejected);
+  console.log("response:", info.response);
+}
