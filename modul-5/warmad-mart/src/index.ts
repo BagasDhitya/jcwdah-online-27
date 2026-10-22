@@ -5,7 +5,6 @@ import http from "http";
 
 import productRouter from "./routes/product.router.js";
 import orderRouter from "./routes/order.router.js";
-import aiRouter from "./routes/ai.router.js";
 import authRouter from "./routes/auth.router.js";
 
 import { errorHandler } from "./middlewares/error.middleware.js";
