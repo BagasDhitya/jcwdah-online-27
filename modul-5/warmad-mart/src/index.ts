@@ -42,7 +42,7 @@ app.use(loggerMiddleware);
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
-app.use("/api/ai", aiRouter);
+// app.use("/api/ai", aiRouter);
 
 app.use("/api/test", (req: Request, res: Response) => {
   res.status(200).send({
