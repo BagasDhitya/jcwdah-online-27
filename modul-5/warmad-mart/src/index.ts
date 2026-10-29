@@ -1,8 +1,12 @@
 import express, { Request, Response } from "express";
 import prisma from "./config/db.js";
 import cors from "cors";
-import http from "http";
 
+// ambil httpserverhandler yang didukung cloudflare
+import { httpServerHandler } from "cloudflare:node";
+
+// ambil config prisma yang udah dimodif
+import { withPrisma } from "./config/db.js";
 import productRouter from "./routes/product.router.js";
 import orderRouter from "./routes/order.router.js";
 import authRouter from "./routes/auth.router.js";
@@ -29,11 +33,17 @@ app.use(
 
 app.use(express.json());
 
-// buat http server untuk konfigurasi socket
-const server = http.createServer(app);
+// supaya konteks request dari settingan cloudflare tidak hilang
+app.use((_req, _res, next) => withPrisma(() => next()));
 
+// buat http server untuk konfigurasi socket
+
+// CLOUDFLARE : tidak bisa pakai http native
+// const server = http.createServer(app);
+
+// CLOUDFLARE : sementara socket io dimatikan
 // inisialisasi socket.IO di atas HTTP Server
-initSocket(server);
+// initSocket(server);
 
 // logger haruus dipasang paling atas untuk merecord semua aktivitas di app
 app.use(loggerMiddleware);
@@ -56,30 +66,8 @@ app.use("/api/queues/stock-notification", handleStockNotification);
 // error middleware HARUS diletakkan di akhir semua router
 app.use(errorHandler);
 
-/**
- * Fungsi untuk menguji koneksi ke database sebelum server berjalan
- */
-async function testDbConnection() {
-  try {
-    await prisma.$queryRaw`SELECT 1`;
-    console.log("✅ Koneksi ke database Neon berhasil terhubung!");
-  } catch (error) {
-    console.error("❌ Gagal terhubung ke database Neon: ", error);
-    process.exit(1);
-  }
-}
-
-/**
- * Fungsi untuk menjalankan server Express dan melakukan verifikasi koneksi DB
- */
-async function startServer() {
-  await testDbConnection();
-
-  // jika ingin tes socketio harus pake server
-  // jika sudah selesai, kemablikan ke app.listen
-  server.listen(PORT, () => {
-    console.log(`Server berjalan di http://localhost:${PORT}`);
-  });
-}
-
-startServer();
+// CLOUDFLARE: untuk sementara disesuaikan dengan setup yang diminta cloudflare
+app.listen(PORT);
+export default httpServerHandler({
+  port: PORT,
+});
