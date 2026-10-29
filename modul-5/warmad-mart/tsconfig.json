@@ -32,7 +32,7 @@
     // "noUnusedParameters": true,
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
-    "noEmit": true,
+    "noEmit": false,
 
     // Recommended Options
     "strict": false,
@@ -42,5 +42,6 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "outDir": "dist"
   }
 }
