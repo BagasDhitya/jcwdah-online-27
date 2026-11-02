@@ -1,0 +1,47 @@
+name: Notify Modul 5 Changes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modul-5/**"
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ambil daftar file yang berubah
+        id: changes
+        run: |
+          {
+            echo 'files<<EOF'
+            git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- modul-5
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Kirim email notifikasi
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          to: ${{ secrets.MAIL_TO }}
+          from: GitHub Actions <${{ secrets.MAIL_USERNAME }}>
+          subject: "[${{ github.repository }}] Perubahan kode di modul-5"
+          body: |
+            Ada perubahan kode di modul-5.
+
+            Oleh    : ${{ github.actor }}
+            Commit  : ${{ github.event.head_commit.message }}
+            Link    : ${{ github.event.head_commit.url }}
+
+            File yang berubah:
+            ${{ steps.changes.outputs.files }}
